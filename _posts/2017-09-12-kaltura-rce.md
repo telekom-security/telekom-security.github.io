@@ -1,7 +1,7 @@
 ---
-title: Kaltura Video Platform - Remote Code Execution (and XSS)
-description: Advisory for Kaltura Video Platform
-header: Kaltura Video Platform - Remote Code Execution (and XSS)
+title: Kaltura Video Platform - Pre-Auth Remote Code Execution (and XSS)
+description: Advisory for Kaltura Video Platform <= 13.1.0
+header: Kaltura Video Platform - Pre-Auth Remote Code Execution (and XSS)
 ---
 During an interal pentest several critical vulnerabilities could be identified
 in the latest version of [Kaltura Community and Enterprise](https://kaltura.com).
