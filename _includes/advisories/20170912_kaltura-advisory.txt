@@ -1,1 +1,0 @@
-../../assets/advisories/20170912_kaltura-advisory.txt
