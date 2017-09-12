@@ -1,0 +1,33 @@
+---
+# Front matter comment to ensure Jekyll properly reads file.
+---
+
+//Import
+@import "base", "mixin", "typography", "layout", "syntax.scss", "custom.scss";
+
+a {
+    color: #417AAA;
+    font-weight:normal;
+}
+
+#header a {
+    color: rgb(51, 51, 51);
+}
+
+#header h1 span {
+    color: #E20074;
+}
+
+footer > span {
+    font-size:0.8em;
+}
+
+.highlight {
+    border:1px solid #7c7c7c;
+    padding-left:10px;
+}
+
+code {
+    font-size:0.9em;
+    color:black;
+}
