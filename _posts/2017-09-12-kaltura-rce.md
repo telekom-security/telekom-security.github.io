@@ -7,7 +7,7 @@ During an interal pentest several critical vulnerabilities could be identified
 in the latest version of [Kaltura Community and Enterprise](https://kaltura.com).
 The vulnerabilities were fixed in the latest release 13.2.0.
 
-A proof of concept exploit may be released later, giving time for users to patch.
+**Update:** A proof of concept exploit can be found [here](/assets/exploits/kaltura_rce_poc_2017-14143.py).
 
 <!--more-->
 
