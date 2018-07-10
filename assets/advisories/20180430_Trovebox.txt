@@ -4,7 +4,8 @@
      Advisory: Trovebox - Authentication Bypass, SQLi, SSRF
  Release Date: 2018/04/30
        Author: Robin Verton (robin.verton@telekom.de)
-          CVE: not yet assigned
+          CVE: CVE-2018-1000551, CVE-2018-1000552,
+               CVE-2018-1000553, CVE-2018-1000554
 
   Application: Trovebox <= 4.0.0-rc6
          Risk: Critical
