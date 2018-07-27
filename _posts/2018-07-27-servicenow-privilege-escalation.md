@@ -8,7 +8,7 @@ injection vulnerability, leading to a full privilege escalation.
 
 <!--more-->
 
-[View the full advisory](/assets/advisories/20180430_Trovebox.txt)
+[View the full advisory](/assets/advisories/20180104_ServiceNow_GlideInjection.txt)
 
 ~~~
                           Telekom Security
