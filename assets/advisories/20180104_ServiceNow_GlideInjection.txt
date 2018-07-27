@@ -25,8 +25,8 @@ Overview:
 Details:
 
   The /report_viewer.do endpoint is prone to a glide script injection
-  vulnerability.  It is possible to injection glide code (scripting language) by
-  injecting a string in the format '${xyz}' in the sysparm_media parameter. To
+  vulnerability.  It is possible to inject glide code (scripting language) by
+  submitting a string in the format '${xyz}' in the sysparm_media parameter. To
   successfully exploit this, an authenticated user is required and any valid
   report id. The following steps will escalate the current user privileges to
   the 'admin' role. This is possible by doing three GlideRecord actions to query
@@ -44,8 +44,8 @@ Details:
       gr.user="<user_id>";gr.role="<role_id>";gr.insert();}
 
   This is only one example of what could be injected, leading to the highest
-  available permissions. A lot of different things can be done by injection Glide
-  code.
+  available permissions. A lot of different things can be done by injection of
+  Glide code.
 
 References:
 
