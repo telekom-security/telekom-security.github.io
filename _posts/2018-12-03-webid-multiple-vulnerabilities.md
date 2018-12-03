@@ -38,6 +38,9 @@ Overview:
   the server. In certain PHP configurations, this could also be used to issue
   arbitrary requests against a other systems over HTTP, HTTPS, FTP or other
   protocols, enabling unintended network boundary traversal.
+  Blind SQL injections were found in five scripts related to the "Your Auctions"
+  functionality. An authenticated attacker could use these vulnerabilities to
+  read data from the database, like password hashes or other secrets.
   Two Cross Site Scripting (XSS) vulnerabilities were also found, one of them
   in the user login page.
 
