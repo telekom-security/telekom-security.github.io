@@ -17,7 +17,7 @@ Multiple vulnerabilities were identified in version 1.2.2 of the popular "WeBid"
                Blind SQL Injection and Reflected Cross Site Scripting
  Release Date: 2018-12-03
        Author: Nils Stünkel <nils.stuenkel@t-systems.com>
-          CVE: Requested
+          CVE: CVE-2018-1000867, CVE-2018-1000868, CVE-2018-1000882
 
   Application: WeBid, up to version 1.2.2
          Risk: Medium
@@ -142,7 +142,7 @@ Disclosure Timeline:
   09. November   2018 - Vendor Contact Requested
   12. November   2018 - Reported Issues to Vendor via their Mantis
   22. November   2018 - Fixes committed to Github[7]
-  03. December   2018 - Advisory published, CVE IDs requested
+  03. December   2018 - Advisory published
 
 
 About Telekom Security:
