@@ -9,7 +9,7 @@ Under some conditions, it is possible to smuggle HTTP headers through a reverse 
 
 In the following post, I will describe some theoretical and practical scenarios and how to abuse them. Some of these methods were used to bypass authentication for critical internal applications.
 
-If you do not want to read the detailed description, there is [Recap](#Recap) at the end of this post.
+If you do not want to read the detailed description, there is [Recap](#recap) at the end of this post.
 
 ## Client certificate authentication over a reverse proxy
 
