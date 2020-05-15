@@ -39,3 +39,17 @@ code {
     font-size:0.9em;
     color:black;
 }
+table {
+    margin: 0 auto;
+}
+td,th {
+    padding: 5px;
+    border-right: 1px solid #ccc;
+}
+td:not(:first-child) {
+    text-align: center;
+}
+td {
+    border-bottom:1px solid #ccc;
+}
+
