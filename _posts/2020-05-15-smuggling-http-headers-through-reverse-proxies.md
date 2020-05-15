@@ -96,7 +96,7 @@ Now let's take a step back first. How does django/python/gunicorn handle a HTTP 
 
 A header passed as "foo-bar" to a django app is therefore converted/normalized to `HTTP_FOO_BAR`. If you add 1 and 1 now, you should see how this will implicate our scenario:
 
-![]({{"/assets/images/header-smuggling_apache2_django_gunicorn.png"|absolute_url}})
+![](/assets/images/header-smuggling_apache2_django_gunicorn.png)
 
 The `unset` (or `set` to an empty string) in the Apache config is therefore ineffective.
 
@@ -150,7 +150,7 @@ As you can see here, Flask (werkzeug) does its own normalization here, capitaliz
 
 Now let's try to abuse this normalization and bypass the "authentication":
 
-![]({{"/assets/images/header-smuggling_apache2_flask_gunicorn.png"|absolute_url}})
+![](/assets/images/header-smuggling_apache2_flask_gunicorn.png)
 
 You can see here that `is_authenticated` returned a value. This is possible because werkzeug [overwrites](https://github.com/pallets/werkzeug/blob/master/src/werkzeug/datastructures.py#L1358) the `__getitem__` method, replacing hyphens with underscores. This way, our smuggled header is now accessible at `request.headers.get('CLIENT_VERIFIED')`. Great success!
 
@@ -197,7 +197,7 @@ The result (in this example from django):
 
 As you can see, the client value is prepended. While I have to agree that its not very promising in this situation, this may become handy when adding a value to `X-Forwarded-For`, `X-Forwarded-Host`, etc. which is set by Apache by default:
 
-![]({{"/assets/images/header-smuggling_apache2_forwarded_for.png"|absolute_url}})
+![](/assets/images/header-smuggling_apache2_forwarded_for.png)
 
 Now let's take the following nginx configuration, where the result looks a bit more promising:
 
