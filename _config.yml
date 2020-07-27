@@ -38,3 +38,4 @@ custom_header: false
 custom_nav_footer: false
 reverse: false
 navigation_menu: false
+theme: jekyll-theme-slate
