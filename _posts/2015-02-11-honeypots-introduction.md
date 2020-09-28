@@ -6,6 +6,8 @@ header: Introduction to Deutsche Telekom's Honeypot Project
 
 Deutsche Telekom's honeypot project was started in 2010 by a small group of enthusiasts. We initially started with Lukas Rist's great [Glastopf web honeypot](http://glastopf.org/) and soon added further honeypot daemons like [kippo](https://github.com/desaster/kippo), [honeytrap](http://honeytrap.carnivore.it/) and [dionaea](http://dionaea.carnivore.it/). Over the next years we deployed more and more honeypots.
 
+<!--more-->
+
 Data captured on our honeypot sensors is visualized on our [Sicherheitstacho](http://www.sicherheitstacho.eu) and we further use the information
 e.g. to inform our customers regarding infections.
 

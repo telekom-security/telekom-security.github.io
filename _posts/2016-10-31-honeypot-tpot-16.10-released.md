@@ -8,6 +8,8 @@ In March 2016 we released
 [T-Pot 16.03](http://dtag-dev-sec.github.io/mediator/feature/2016/03/11/t-pot-16.03.html)
 and the positive feedback encouraged us to continue development and share all the improvements with the community and are proud to present to you ...
 
+<!--more-->
+
 # T-Pot 16.10
 
 T-Pot 16.10 now uses Ubuntu Server 16.04 LTS and is based on

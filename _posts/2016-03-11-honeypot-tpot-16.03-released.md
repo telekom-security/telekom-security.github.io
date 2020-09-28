@@ -8,6 +8,8 @@ Last year we released
 [T-Pot 15.03](http://dtag-dev-sec.github.io/mediator/feature/2015/03/17/concept.html)
 as open source and we received lots of positive feedback and naturally feature requests which encouraged us to continue development and share our work as open source and are proud to present to you ...
 
+<!--more-->
+
 # T-Pot 16.03
 
 T-Pot 16.03 is based on

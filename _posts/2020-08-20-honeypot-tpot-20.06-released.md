@@ -7,6 +7,8 @@ header: 'T-Pot Version 20.06 released'
 On June, 30th 2020 we finally released T-Pot 20.06 after an extensive period of testing to ensure the update process (which is still in beta) is not likely to break things. With T-Pot 20.06 released we are proud to see that T-Pot is now growing faster than before.
 T-Pot 20.06 comes with new honeypots, such as Dicompot, a new Elasticpot and HoneySAP. All of which have Kibana dashboards readily available to get you covered...
 
+<!--more-->
+
 ## Upgrade from 19.03.x
 - If you are running T-Pot 19.x you can upgrade to T-Pot 20.06.0 by running `/opt/tpot/update.sh`. Please be aware upgrades can break things, so please backup all of your data or take snapshot of your machine **before** you run the update procedure.
 - To protect possible changes of your Kibana objects you need to manually [export](https://github.com/dtag-dev-sec/tpotce/wiki/Import---Export-Kibana-Objects) (backup) your objects and manually [import](https://github.com/dtag-dev-sec/tpotce/wiki/Import---Export-Kibana-Objects) (overwrite) the provided T-Pot Kibana Objects after upgrading.

@@ -4,10 +4,10 @@ description: 'Manual Docker Update for T-Pot (docker-engine 1.10)'
 header: 'Manual Docker Update for T-Pot (docker-engine 1.10)'
 ---
 
-
 Yesterday Docker released version 1.10 (http://blog.docker.com/2016/02/docker-1-10/). While this release will
 improve on security and bring lots of useful features the automatic upgrade within T-Pot (http://dtag-dev-sec.github.io/feature/2015/10/23/updated-docker.html) will hang.
 
+<!--more-->
 
 
 You have to manually upgrade Docker to the latest version in order for your T-Pot installation to work properly.

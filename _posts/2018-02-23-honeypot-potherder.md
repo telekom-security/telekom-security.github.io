@@ -6,14 +6,11 @@ header: 'Potherder: a Honeypot Story'
 
 # Potherder.
 
-
-### Operating traps for seven years @DTAG. 
-
-<br>
-
 It's been seven years now that I started to contribute to the setup of Deutsche Telekom's Early Warning System which is running multiple honeypots all over the globe and I would like to share my personal view on the history of the project, its internal goals and its achievements. 
 
-I still remember the first group meeting with my department in November 2010. It was my third day at the new employment in the team "Security of Office and Portals" and I happened to start my new career path all dressed up, because I thought this was the way to go in a large corporation. Turns out I was wrong about this, some people were more technical than I initially thought and it took some time to lose the first impression I made wearing a suit …
+I still remember the first group meeting with my department in November 2010. It was my third day at the new employment in the team "Security of Office and Portals" and I happened to start my new career path all dressed up, because I thought this was the way to go in a large corporation. Turns out I was wrong about this, some people were more technical than I initially thought and it took some time to lose the first impression I made wearing a suit…
+
+<!--more-->
 
 I was really curious when during the meeting one of my new colleagues presented on the current status of their internal web honeypot project, which had been running for the past six months. The four people involved in this next-to-dayjob-research project (@schmalle, @trixam, Lutz and Rainer) were running [glastopf]( https://github.com/mushorg/glastopf), a web honeypot to capture attacks like LFIs and php command injection attempts. They were presenting to the group how glastopf worked and the observations they had made within the last 6 months. During my previous employment at the governmental IT security organization, I had already gathered some experience with honeypots as one of my fellow colleagues was the author of a honeypot daemon, honeytrap.  So, I felt this was something fun and asked if I could contribute to this project. And luckily, I was encouraged to do so…  
 

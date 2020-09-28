@@ -13,6 +13,8 @@ T-Pot 19.03 runs on Debian (Sid), is based heavily on
 
 and includes dockerized versions of the following honeypots
 
+<!--more-->
+
 * [adbhoney](https://github.com/huuck/ADBHoney),
 * [ciscoasa](https://github.com/Cymmetria/ciscoasa_honeypot),
 * [conpot](http://conpot.org/),
