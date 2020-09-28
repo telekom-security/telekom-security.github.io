@@ -7,6 +7,8 @@ header: 'T-Pot Version 17.10 released'
 In October 2016 we released
 [T-Pot 16.10](http://dtag-dev-sec.github.io/mediator/feature/2016/10/31/t-pot-16.10.html)
 
+<!--more-->
+
 # T-Pot 17.10
 
 T-Pot 17.10 runs on the latest 16.04 LTS Ubuntu Server Network Installer image, is based on

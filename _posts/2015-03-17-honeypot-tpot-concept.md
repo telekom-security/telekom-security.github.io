@@ -7,6 +7,8 @@ header: 'Introduction into T-Pot: A Multi-Honeypot Platform'
 We created a honeypot platform, which is based on the well-established honeypots [glastopf](http://glastopf.org/), [kippo](https://github.com/desaster/kippo), [honeytrap](http://honeytrap.carnivore.it/) and [dionaea](http://dionaea.carnivore.it/), the network IDS/IPS [suricata](http://suricata-ids.org/), [elasticsearch-logstash-kibana](http://www.elasticsearch.org/overview/), [ewsposter](https://github.com/dtag-dev-sec/ews) and some
 [docker](https://www.docker.com/) magic. We want to make this technology available to everyone who is interested and release it as a Community Edition. We want to encourage you to participate.
 
+<!--more-->
+
 # TL;DR
 1. Meet the [system requirements](#requirements). Use at least 2GB RAM and 40GB disk space as well as a working internet connection.
 2. Download the [tpotce.iso](http://community-honeypot.de/tpotce.iso) or [create it yourself](#createiso). 

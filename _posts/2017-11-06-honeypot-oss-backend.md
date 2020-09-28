@@ -9,6 +9,8 @@ proud to release a new version of T-Pot with exciting new features and ...
 
 something more.
 
+<!--more-->
+
 For the last years our backend was driven by a very robust Grails code written by our former consultant / developer and friend Lutz Wischmann. The backend itself was running on a bare metal setup in the computing centre of Cronon (thanks for all your support over the years!).
 
 In middle of 2017 we decided to rewrite the backend, as we needed new features and wanted to be more flexible in handling the data. Initially we had a closer look at Kotlin, the new language from Jetbrains, which is a really cool new language. However, as many of the people within our internal honeypot community are python lovers, we went for Python3 with the Flask framework. As the basis for our backend we now use several instances within our own [Open Telecom Cloud](https://cloud.telekom.de/en/infrastructure/open-telekom-cloud/) (all debian 9 based, fully automated installation via ansible, ...). 

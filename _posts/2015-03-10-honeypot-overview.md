@@ -10,6 +10,8 @@ Parts of them were developed in "one day a month" projects, others in spare time
 Our "one day a month" approach from the central security organization basically means, that the
 security employees can work one day a month on a technical topic, aside from day-to-day business. The topic must be somehow related to their work, but does not necessarily have to be security-focussed.
 
+<!--more-->
+
 # Public Projects
 
 ## T-Pot CE
