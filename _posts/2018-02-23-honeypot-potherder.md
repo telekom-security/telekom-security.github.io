@@ -4,8 +4,6 @@ description: 'Potherder: a Honeypot Story'
 header: 'Potherder: a Honeypot Story'
 ---
 
-# Potherder.
-
 It's been seven years now that I started to contribute to the setup of Deutsche Telekom's Early Warning System which is running multiple honeypots all over the globe and I would like to share my personal view on the history of the project, its internal goals and its achievements. 
 
 I still remember the first group meeting with my department in November 2010. It was my third day at the new employment in the team "Security of Office and Portals" and I happened to start my new career path all dressed up, because I thought this was the way to go in a large corporation. Turns out I was wrong about this, some people were more technical than I initially thought and it took some time to lose the first impression I made wearing a suit…

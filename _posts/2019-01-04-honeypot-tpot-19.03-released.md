@@ -4,6 +4,9 @@ description: 'T-Pot Version 19.03 released'
 header: 'T-Pot Version 19.03 released'
 ---
 
+In October 2016 we released T-Pot 19.03. Read more Details here.
+
+<!--more-->
 
 # T-Pot 19.03
 
@@ -12,8 +15,6 @@ T-Pot 19.03 runs on Debian (Sid), is based heavily on
 [docker](https://www.docker.com/), [docker-compose](https://docs.docker.com/compose/)
 
 and includes dockerized versions of the following honeypots
-
-<!--more-->
 
 * [adbhoney](https://github.com/huuck/ADBHoney),
 * [ciscoasa](https://github.com/Cymmetria/ciscoasa_honeypot),
