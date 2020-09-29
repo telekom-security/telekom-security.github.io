@@ -4,7 +4,7 @@ description: 'T-Pot Version 19.03 released'
 header: 'T-Pot Version 19.03 released'
 ---
 
-In October 2016 we released T-Pot 19.03. Read more Details here.
+In Mach 2019 we released T-Pot 19.03. Read more Details here.
 
 <!--more-->
 
