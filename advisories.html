@@ -1,0 +1,23 @@
+---
+layout: default
+---
+<!-- Posts -->
+
+<h1>Security Advisories</h1>
+
+<ul id="posts">
+    <ul>
+    {% for post in site.tags.advisories %}
+
+    <li>
+
+        <a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">
+        {{ post.date | date:"%Y" }}, {%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}
+        </a>
+
+
+    </li>
+
+    {% endfor %}
+    </ul>
+</ul>

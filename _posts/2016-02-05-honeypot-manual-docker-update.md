@@ -2,6 +2,7 @@
 title: 'Manual Docker Update for T-Pot (docker-engine 1.10)'
 description: 'Manual Docker Update for T-Pot (docker-engine 1.10)'
 header: 'Manual Docker Update for T-Pot (docker-engine 1.10)'
+tags: ['honeypot project']
 ---
 
 Yesterday Docker released version 1.10 (http://blog.docker.com/2016/02/docker-1-10/). While this release will

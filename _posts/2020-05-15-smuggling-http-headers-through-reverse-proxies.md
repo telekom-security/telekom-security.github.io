@@ -2,6 +2,7 @@
 title: Smuggling HTTP headers through reverse proxies
 description: Smuggling HTTP headers through reverse proxies
 header: Smuggling HTTP headers through reverse proxies
+tags: ['advisories', 'research']
 ---
 Under some conditions, it is possible to smuggle HTTP headers through a reverse proxy, even if it was explicitly unset before. This is possible in some cases due to HTTP header normalization and parser differentials. Because HTTP headers are commonly used as way to pass authentication data to the backend (for example in mutual TLS scenarios), this can lead to critical vulnerabilities.
 

@@ -2,6 +2,7 @@
 title: Trovebox - Authentication Bypass, SQLi, SSRF
 description: Advisory for Trovebox <= 4.0.0-rc6
 header: Trovebox - Authentication Bypass, SQLi, SSRF
+tags: ['advisories']
 ---
 Trovebox, a photo sharing and management application, is prone to several critical
 vulnerabilities. Exploiting is trivial and it is recommended to update

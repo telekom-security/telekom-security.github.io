@@ -2,6 +2,7 @@
 title: 'Introduction into T-Pot: A Multi-Honeypot Platform'
 description: 'Introduction into T-Pot: A Multi-Honeypot Platform'
 header: 'Introduction into T-Pot: A Multi-Honeypot Platform'
+tags: ['honeypot project']
 ---
 
 We created a honeypot platform, which is based on the well-established honeypots [glastopf](http://glastopf.org/), [kippo](https://github.com/desaster/kippo), [honeytrap](http://honeytrap.carnivore.it/) and [dionaea](http://dionaea.carnivore.it/), the network IDS/IPS [suricata](http://suricata-ids.org/), [elasticsearch-logstash-kibana](http://www.elasticsearch.org/overview/), [ewsposter](https://github.com/dtag-dev-sec/ews) and some

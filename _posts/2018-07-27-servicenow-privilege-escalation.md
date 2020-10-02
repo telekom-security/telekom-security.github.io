@@ -2,6 +2,7 @@
 title: ServiceNow Glide scripting injection leading to privilege escalation
 description: Advisory for ServiceNow <= Release 'Jakarta' Patch 8
 header: ServiceNow Glide Scripting injection leading to privilege escalation
+tags: ['advisories']
 ---
 ServiceNow, an enterprise IT service management solution, is vulnerable to an template
 injection vulnerability, leading to a full privilege escalation.

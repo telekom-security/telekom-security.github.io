@@ -2,6 +2,7 @@
 title: 'T-Pot Version 20.06 released'
 description: 'T-Pot Version 20.06 released'
 header: 'T-Pot Version 20.06 released'
+tags: ['honeypot project']
 ---
 
 On June, 30th 2020 we finally released T-Pot 20.06 after an extensive period of testing to ensure the update process (which is still in beta) is not likely to break things. With T-Pot 20.06 released we are proud to see that T-Pot is now growing faster than before.
