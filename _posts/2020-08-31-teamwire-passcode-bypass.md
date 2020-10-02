@@ -2,6 +2,7 @@
 title: Teamwire Pass Code Bypass
 description: Advisory for Teamwire (Android) < version 5.4.3
 header: Teamwire Pass Code Bypass
+tags: ['advisories']
 ---
 A pass code bypass in the mobile application of Teamwire for Android allows an attacker with physical access to the phone to use the app without entering the valid pass code. 
 <!--more-->

@@ -2,6 +2,7 @@
 title: 'Updated Docker Ubuntu Repository for T-Pot'
 description: 'Updated Docker Ubuntu Repository for T-Pot'
 header: 'Updated Docker Ubuntu Repository for T-Pot'
+tags: ['honeypot project']
 ---
 
 Last spring we released T-Pot and ever since, Docker evolved rapidly with new versions, new features, and eventually a new repository. With regards to early releases of T-Pot and the fast development of Docker, we manually pinned the Docker versions used to the 1.5.x and 1.6.x branches. Now, with the latest Docker releases and Dockers' switch to a new repository for Ubuntu (and deprecating the one we have been using), we updated the T-Pot ISO and the GitHub project accordingly.

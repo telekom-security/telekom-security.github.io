@@ -2,6 +2,7 @@
 title: 'T-Pot Version 16.03 released'
 description: 'T-Pot Version 16.03 released'
 header: 'T-Pot Version 16.03 released'
+tags: ['honeypot project']
 ---
 
 Last year we released

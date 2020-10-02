@@ -2,6 +2,7 @@
 title:  WeBid Directory Traversal, Blind SQL Injection and XSS
 description: Advisory for WeBid <= Version 1.2.2
 header: WeBid Directory Traversal, Blind SQL Injection and XSS
+tags: ['advisories']
 ---
 Multiple vulnerabilities were identified in version 1.2.2 of the popular "WeBid" open source auction system. Patches for all three vulnerabilities are available in their GitHub, and will be included in the next release.
 
@@ -154,4 +155,3 @@ About Telekom Security:
   https://security.telekom.com
   http://www.sicherheitstacho.eu
 ~~~
-

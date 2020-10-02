@@ -2,6 +2,7 @@
 title: Juniper Junos Space Local File Inclusion Vulnerability
 description: Juniper Junos Space prior to 19.4R1 Local File Inclusion Vulnerability
 header: Juniper Junos Space prior to 19.4R1 Local File Inclusion Vulnerability
+tags: ['advisories']
 ---
 A Local File Inclusion vulnerability (CVE-2020-1611) in Juniper Networks Junos Space allows an attacker to view all files on the target when the device receives malicious HTTP packets.
 
