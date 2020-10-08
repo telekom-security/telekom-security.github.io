@@ -2,7 +2,7 @@
 title: 'T-Pot Version 19.03 released'
 description: 'T-Pot Version 19.03 released'
 header: 'T-Pot Version 19.03 released'
-tags: ['honeypot project']
+tags: ['Honeypots']
 ---
 
 In Mach 2019 we released T-Pot 19.03. Read more Details here.

@@ -2,7 +2,7 @@
 title: 'Opensourcing our Honeypot Backend (well, parts of it)'
 description: 'Opensourcing our Honeypot Backend (well, parts of it)'
 header: 'Opensourcing our Honeypot Backend (well, parts of it)'
-tags: ['honeypot project']
+tags: ['Honeypots']
 ---
 
 The last years we have consistently supported the community by releasing new versions of our multi honeypot platform called T-Pot. This November we are

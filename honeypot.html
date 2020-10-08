@@ -3,11 +3,11 @@ layout: default
 ---
 <!-- Posts -->
 
-<h1>Honeypot Project</h1>
+<h1>Honeypots</h1>
 
 <ul id="posts">
     <ul>
-    {% for post in site.tags['honeypot project'] %}
+    {% for post in site.tags['Honeypots'] %}
 
     <li class="post">
         <h2><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">{%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}</a></h2>

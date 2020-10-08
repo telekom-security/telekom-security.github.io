@@ -2,7 +2,7 @@
 title: 'Potherder: a Honeypot Story'
 description: 'Potherder: a Honeypot Story'
 header: 'Potherder: a Honeypot Story'
-tags: ['honeypot project']
+tags: ['Honeypots']
 ---
 
 It's been seven years now that I started to contribute to the setup of Deutsche Telekom's Early Warning System which is running multiple honeypots all over the globe and I would like to share my personal view on the history of the project, its internal goals and its achievements. 
