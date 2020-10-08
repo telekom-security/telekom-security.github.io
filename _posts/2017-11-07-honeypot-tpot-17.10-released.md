@@ -2,7 +2,7 @@
 title: 'T-Pot Version 17.10 released'
 description: 'T-Pot Version 17.10 released'
 header: 'T-Pot Version 17.10 released'
-tags: ['honeypot project']
+tags: ['Honeypots']
 ---
 
 In October 2016 we released

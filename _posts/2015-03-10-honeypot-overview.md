@@ -2,7 +2,7 @@
 title: Full Overview about all of Deutsche Telekom's Honeypot Projects
 description: Full Overview about all of Deutsche Telekom's Honeypot Projects
 header: Full Overview about all of Deutsche Telekom's Honeypot Projects
-tags: ['honeypot project']
+tags: ['Honeypots']
 ---
 
 Over the time, we developed a number of projects, which we mostly published on [Github](https://github.com/dtag-dev-sec/).
