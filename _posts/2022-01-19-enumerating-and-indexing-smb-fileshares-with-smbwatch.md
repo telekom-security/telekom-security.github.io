@@ -12,12 +12,6 @@ customers, our main focus is improving our internal security by simulating
 state of the art attacks.
 
 <!--more-->
-
-In order to improve and harden our group’s critical telco-infrastructure,
-Deutsche Telekom Security GmbH provides a red team to simulate real world
-attack scenarios. While our red team also offers its capabilities for external
-customers, our main focus is improving our internal security by simulating
-state of the art attacks.
  
 Some weeks ago we had a deeper look at Deutsche Telekom AG’s internal network,
 looking at a not-really-sophisticated attack vector: SMB shares. Over time, our
