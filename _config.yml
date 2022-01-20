@@ -37,5 +37,5 @@ version: "1.0.0"
 custom_header: false
 custom_nav_footer: false
 reverse: false
-navigation_menu: false
+navigation_menu: true
 theme: jekyll-theme-slate
