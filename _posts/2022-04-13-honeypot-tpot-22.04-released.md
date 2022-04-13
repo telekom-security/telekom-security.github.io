@@ -5,8 +5,7 @@ header: 'T-Pot Version 22.04 released'
 tags: ['Honeypots','general']
 ---
 
-# T-Pot - The All In One Multi Honeypot Plattform
-T-Pot is the all in one, optionally distributed, multiarch (amd64, arm64) honeypot plattform, supporting 20+ honeypots and countless visualization options using the Elastic Stack, animated live attack maps and lots of security tools to further improve the deception experience.
+We are proud to announce the release of T-Pot 22.04 with lots of new features i.e. new honeypots, a distributed installation option, arm64 support, live attack maps, Debian 11 base, ELK 8.x, and more. If you ever wanted to get started with honeypots (or take it to the next level), but with the ease of use of an appliance, now is the best time to get started.
 
 <!--more-->
 
