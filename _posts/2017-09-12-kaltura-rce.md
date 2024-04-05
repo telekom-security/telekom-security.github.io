@@ -3,6 +3,9 @@ title: Kaltura Video Platform - Pre-Auth Remote Code Execution (and XSS)
 description: Advisory for Kaltura Video Platform <= 13.1.0
 header: Kaltura Video Platform - Pre-Auth Remote Code Execution (and XSS)
 tags: ['advisories']
+cwes: ['Deserialization of Untrusted Data (CWE-502)', 'Cross-site Scripting (CWE-79)']
+affected_product: 'Kaltura Video Platform'
+vulnerability_release_date: '2017-10-17'
 ---
 During an interal pentest several critical vulnerabilities could be identified
 in the latest version of [Kaltura Community and Enterprise](https://kaltura.com).

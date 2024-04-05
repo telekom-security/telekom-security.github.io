@@ -3,6 +3,9 @@ title: IBM Maximo Asset Management is vulnerable via XXE
 description: IBM Maximo Asset Management is vulnerable to Information Disclosure via XXE Vulnerability (CVE-2020-4463)
 header: IBM Maximo Asset Management is vulnerable via XXE 
 tags: ['advisories']
+cwes: ['Improper Restriction of XML External Entity Reference (CWE-611)']
+affected_product: 'IBM Maximo Asset Management'
+vulnerability_release_date: '2020-07-29'
 ---
 
 IBM Maximo Asset Management is vulnerable to an XML External Entity Injection (XXE) attack when processing XML data. A remote attacker could exploit this vulnerability to expose sensitive information or consume memory resources.

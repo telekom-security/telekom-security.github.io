@@ -3,6 +3,9 @@ title:  WeBid Directory Traversal, Blind SQL Injection and XSS
 description: Advisory for WeBid <= Version 1.2.2
 header: WeBid Directory Traversal, Blind SQL Injection and XSS
 tags: ['advisories']
+cwes: ['SQL Injection (CWE-89)', 'Cross-site Scripting (CWE-79)', 'Path Traversal (CWE-22)']
+affected_product: 'WeBid Directory'
+vulnerability_release_date: '2018-12-03'
 ---
 Multiple vulnerabilities were identified in version 1.2.2 of the popular "WeBid" open source auction system. Patches for all three vulnerabilities are available in their GitHub, and will be included in the next release.
 

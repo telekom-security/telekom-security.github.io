@@ -1,23 +1,60 @@
 ---
 layout: default
 ---
-<!-- Posts -->
 
 <h1>Security Advisories</h1>
 
-<ul id="posts">
-    <ul>
-    {% for post in site.tags.advisories %}
+As part of the Security Community, we actively support vulnerability research. Here you can find information about discovered vulnerabilities:
 
-    <li>
+<!--
 
-        <a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">
-        {{ post.date | date:"%Y" }}, {%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}
-        </a>
+    Lists the vulnerabilities retrieved from:
+    - posts (needed values: vulnerability_release_date, affected_product, cwes)
+-->
 
 
-    </li>
 
-    {% endfor %}
-    </ul>
-</ul>
+{% assign vul_data = site.posts %}
+{% assign sorted_vuls = vul_data | sort: 'vulnerability_release_date' | reverse %}
+{% assign lastyear = "" %}
+{% for vul in sorted_vuls %}
+    {% if vul.vulnerability_release_date != nil %}
+        {% assign currentyear = vul.vulnerability_release_date | date:"%Y" %}
+        {% if lastyear != currentyear %}
+            {% if lastyear != "" %}
+                </table>
+            {% endif %}
+            <h4> {{ currentyear }} </h4>
+            <table width="100%">
+                <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Vulnerabilty Type</th>
+                    <th>Details</th>
+                </tr>
+        {% endif %}
+        <tr>
+            <td width="10%">
+                {{ vul.vulnerability_release_date | date:"%m/%Y" }}
+            </td>
+            <td width="40%">
+                {{ vul.affected_product }}
+            </td>  
+            <td width="40%">
+                {% assign cwe_info = vul.cwes  | join: ", " | replace: '-', '&#8209;' %}
+                {{ cwe_info }}
+                
+            </td>  
+            <td width="10%">
+                {% assign spost = vul.url | strip %}
+                {% if spost != "" %}
+                    <a href="{{ vul.url }}" />Post</a>
+                {% else %}
+                    Upcoming
+                {% endif %}
+            </td>    
+        </tr>
+        {% assign lastyear = currentyear %}
+    {% endif %}
+{% endfor %}
+</table>
