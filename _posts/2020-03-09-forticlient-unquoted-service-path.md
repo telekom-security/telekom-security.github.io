@@ -3,6 +3,9 @@ title: Unquoted Service Path exploit in Fortinet FortiClient
 description: Unquoted Service Path exploit in FortiClient (CVE-2019-17658)
 header: Unquoted Service Path exploit in Fortinet FortiClient
 tags: ['advisories']
+cwes: ['Unquoted Search Path or Element (CWE-428)']
+affected_product: 'Fortinet FortiClient'
+vulnerability_release_date: '2020-03-12'
 ---
 FortiClient for Windows prior to 6.2.3 is vulnerable to an unquoted service path vulnerability (CVE-2019-17658). That may allow an attacker to gain elevated privileges via the FortiClientConsole executable service path.
 
