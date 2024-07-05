@@ -1,7 +1,7 @@
 ---
-title: Peripheral Sight - Red Teaming with printer CVE
+title: Peripheral Sight - Red Teaming with printer CVE-2024-5143
 description: Discovery of printer CVE during Red Team assessment
-header: Peripheral Sight - Red Teaming with printer CVE
+header: Peripheral Sight - Red Teaming with printer CVE-2024-5143
 tags: ['advisories']
 cwes: ['(Possible) Exposure of Sensitive Information to an Unauthorized Actor (CWE-200)']
 affected_product: 'Certain HP LaserJet Pro Printers'
