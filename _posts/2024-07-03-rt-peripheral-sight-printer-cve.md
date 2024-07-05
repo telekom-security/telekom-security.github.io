@@ -71,6 +71,7 @@ Furthermore, restricting service accounts to their apparent use should be a give
 ### References
 
 - HP: [https://support.hp.com/us-en/document/ish_10643804-10643841-16/hpsbpi03941](https://support.hp.com/us-en/document/ish_10643804-10643841-16/hpsbpi03941)
+- Simple PoC to dump credentials: [https://github.com/petermueller-T/PoCs/blob/main/python/simple_smtp_server.py](https://github.com/petermueller-T/PoCs/blob/main/python/simple_smtp_server.py)
 
 ### Timeline
 
