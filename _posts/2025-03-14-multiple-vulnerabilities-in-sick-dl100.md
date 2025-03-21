@@ -33,7 +33,7 @@ The device uses an unencrypted, proprietary protocol for communication, authenti
 
 ### [CVE-2025-27595](https://www.cve.org/CVERecord?id=CVE-2025-27595): Use of Weak Hash
 
-The device uses a weak hashing alghorithm to create the password hash. Hence, a matching password can be easily calculated by an attacker. This impacts the security and the integrity of the device.
+The device uses a weak hashing algorithm to create the password hash. Hence, a matching password can be easily calculated by an attacker. This impacts the security and the integrity of the device.
 
 ### References
 
