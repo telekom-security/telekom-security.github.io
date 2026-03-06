@@ -25,6 +25,9 @@ defaults:
     values:
       layout: "post"
 
+exclude:
+  - Contribute.md
+
 # Plugins
 plugins:
   - jekyll-paginate
