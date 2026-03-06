@@ -1,0 +1,24 @@
+FROM docker.io/ruby:3.2-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential git && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /site
+
+# Pre-install gems so they are cached in the image layer.
+# When the repo is bind-mounted at runtime, bundler will
+# find the already-installed gems and skip the install step.
+COPY Gemfile Gemfile.lock* ./
+
+# Create a wrapper Gemfile outside /site (so the bind-mount won't
+# shadow it) that pulls in the project Gemfile and adds webrick,
+# which jekyll serve needs on Ruby >= 3.0.
+RUN printf 'eval_gemfile "/site/Gemfile"\ngem "webrick"\n' > /Gemfile.dev
+RUN BUNDLE_GEMFILE=/Gemfile.dev bundle install --jobs=4
+
+ENV BUNDLE_GEMFILE=/Gemfile.dev
+
+EXPOSE 4000
+
+CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--livereload"]
