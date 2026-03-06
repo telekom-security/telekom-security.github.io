@@ -11,3 +11,26 @@ layout: default
 	</div>
 </article>
 
+<!-- Image modal -->
+<div id="img-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);cursor:pointer;align-items:center;justify-content:center;">
+	<img id="img-modal-src" style="max-width:90vw;max-height:90vh;border-radius:4px;box-shadow:0 0 30px rgba(0,0,0,.6);" alt="">
+</div>
+
+<script>
+(function(){
+	var modal = document.getElementById('img-modal');
+	var modalImg = document.getElementById('img-modal-src');
+	document.getElementById('post-page').addEventListener('click', function(e){
+		var img = e.target.closest('img');
+		if(!img) return;
+		e.preventDefault();
+		modalImg.src = img.src;
+		modal.style.display = 'flex';
+	});
+	modal.addEventListener('click', function(){
+		modal.style.display = 'none';
+		modalImg.src = '';
+	});
+})();
+</script>
+
