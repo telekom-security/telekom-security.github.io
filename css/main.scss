@@ -10,8 +10,44 @@ a {
     font-weight:normal;
 }
 
-.post > h2 > a {
+.post h2 > a {
     font-size:.9em;
+}
+
+/* Post preview image floated inside excerpt */
+.post__image-link {
+    float: left;
+    margin: 0.2em 1.2em 0.8em 0;
+}
+
+.post__image {
+    width: 200px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+}
+
+.post__image--article {
+    float: left;
+    width: 500px;
+    margin: 0.3em 1.5em 1em 0;
+}
+
+@media (max-width: 600px) {
+    .post__image-link {
+        float: none;
+        margin: 0.5em 0;
+    }
+    .post__image {
+        width: 100%;
+    }
+    .post__image--article {
+        float: none;
+        width: 100%;
+        margin: 0.5em 0;
+    }
 }
 
 #post-page > h2 {

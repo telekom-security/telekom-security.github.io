@@ -5,6 +5,9 @@ layout: default
 	<h2>{%if page.header %}{{ page.header }}{% else %}{{ page.title }}{% endif %}</h2>		
 	<time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
 	<div class="content">
+		{%- if page.og_image and page.og_image != '/img/favicon.png' %}
+		<a href="{{ page.og_image }}"><img src="{{ page.og_image }}" alt="" class="post__image post__image--article"></a>
+		{%- endif %}
 
 		{{ content }}
 		
