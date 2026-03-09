@@ -7,7 +7,7 @@
 	{%- assign seo_title = page.og_title | default: page.title | default: site.title -%}
 	{%- assign seo_description = page.og_description | default: page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | strip | truncate: 160 -%}
 	{%- assign seo_url = page.url | prepend: site.url -%}
-	{%- assign seo_image = page.og_image | default: page.image | default: '/img/favicon.png' | prepend: site.url -%}
+	{%- assign seo_image = page.og_image | default: page.image | default: '/img/telekom_security.png' | prepend: site.url -%}
 	{%- assign seo_og_type = page.og_type | default: nil -%}
 	{%- assign seo_twitter_card = page.twitter_card | default: 'summary' -%}
 	{%- assign seo_twitter_creator = page.twitter_creator | default: nil -%}
