@@ -105,7 +105,7 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-15: Shared patch with Red Hat and Canonical
 - 2026-04-19: Privately informed distribution vendors through [distros mailing list](https://oss-security.openwall.org/wiki/mailing-lists/distros), shared patch and publication date
 - 2026-04-21: Reaffirmed the publication date with distribution maintainers 
-- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://oss-security.openwall.org/wiki/mailing-lists) and this blog post.
+- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://www.openwall.com/lists/oss-security/2026/04/22/6) and this blog post.
 - 2026-04-22: Got CVE-2026-41651 assigned
 
 ### Advisories
