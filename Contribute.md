@@ -32,6 +32,16 @@ If omitted, the template falls back to the standard parameters listed above.
 | `og_title`         | `og:title`, `twitter:title` | `title` → `site.title`            | `DarkGate Loader Deep-Dive`                  |
 | `og_description`   | `og:description`, `twitter:description` | `description` → post excerpt → `site.description` | `A technical analysis of the DarkGate loader infection chain` |
 | `og_image`         | `og:image`, `twitter:image` | `image` → `/img/favicon.png`       | `/img/posts/darkgate-social.png`             |
+
+> **Article preview image:** When `og_image` is set to something other than the
+> default favicon, it is also displayed as a visual preview:
+> - **Index page** – the image is shown as a 16:9 thumbnail floated to the left
+>   of the post excerpt.
+> - **Article page** – the image is shown floated to the left at the start of
+>   the article content. Clicking any image in an article opens it in a
+>   full-screen modal overlay; clicking anywhere outside the image closes the
+>   modal.
+
 | `og_type`          | `og:type`              | `article` (posts) / `website` (pages)   | `profile`                                    |
 | `twitter_card`     | `twitter:card`         | `summary`                               | `summary_large_image`                        |
 | `twitter_creator`  | `twitter:creator`      | *(not set)*                             | `@marqufabi`                                 |
