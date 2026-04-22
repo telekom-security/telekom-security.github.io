@@ -11,7 +11,7 @@ vulnerability_release_date: '2026-04-20'
 
 
 
-Today we publicly disclose a high-severity vulnerability (CVSS 3: 8.8) - in coordination with distro maintainers - that affects multiple Linux distributions in their default installations.
+Today we publicly disclose a high-severity vulnerability (CVSS 3.1: 8.8) - in coordination with distro maintainers - that affects multiple Linux distributions in their default installations.
 The Pack2TheRoot vulnerability can be exploited by any local unprivileged user to obtain root access on a vulnerable system. <!--more-->
 
 The vulnerability lies in the [PackageKit daemon](https://github.com/PackageKit/PackageKit), a cross-distro package management abstraction layer.
@@ -55,6 +55,17 @@ Note `grep`'s `-i` flag, as the package may be installed in camel case as `Packa
 
 To check if the PackageKit daemon is available, run `systemctl status packagekit` or `pkmon`.
 If `systemctl` shows it as `loaded` or `running`, or `pkmon` shows transaction output, the daemon is active and your system is potentially exploitable if unpatched.
+
+**Updated Packages**
+
+Despite of the fixed release `1.3.5`, multiple Distributions released patched packages.
+In the following, we link the Distros package overviews, that show Distro specific patched versions.
+
+- Debian: [https://security-tracker.debian.org/tracker/CVE-2026-41651](https://security-tracker.debian.org/tracker/CVE-2026-41651)
+- Ubuntu: [https://bugs.launchpad.net/bugs/cve/2026-41651](https://bugs.launchpad.net/bugs/cve/2026-41651)
+- Fedora 42 - 44: Fixed in PackageKit-1.3.4-3 [https://koji.fedoraproject.org/koji/packageinfo?packageID=5206](https://koji.fedoraproject.org/koji/packageinfo?packageID=5206)
+
+
 
 ### Indicators of compromise (IOC) {#indicators-of-compromise}
 
@@ -103,6 +114,7 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - [CVE-2026-41651](https://www.cve.org/CVERecord?id=CVE-2026-41651)
 
 *The images in this article are free to use, as long as a reference to this blog post is provided.*
+A [SVG version](/assets/images/Pack2TheRoot/Pack2TheRoot.svg) of the Pack2TheRoot Logo is also available.
 
 <style>
 .content {
@@ -114,7 +126,7 @@ If you have questions regarding the vulnerability or are interested in our [secu
 }
 
 .img-small {
-  width: 90%;
+  width: 80%;
   max-width: 100%;
   height: auto;
 }

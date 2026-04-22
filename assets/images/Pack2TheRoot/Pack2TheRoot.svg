@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280.00" height="720.00" viewBox="0 0 1280.00 720.00">
+  <rect width="100%" height="100%" fill="#222329" />
+  <g transform="translate(170.00,0.00)">
+    <defs>
+        <clipPath id="clip-front">
+            <polygon points="280.00,250.00 900.00,250.00 900.00,680.00 280.00,680.00" />
+        </clipPath>
+        <clipPath id="clip-left">
+            <polygon points="40.00,40.00 280.00,250.00 280.00,680.00 40.00,470.00" />
+        </clipPath>
+        <clipPath id="clip-top">
+            <polygon points="40.00,40.00 660.00,40.00 900.00,250.00 280.00,250.00" />
+        </clipPath>
+    </defs>
+  <polygon points="40.00,40.00 280.00,250.00 280.00,680.00 40.00,470.00" fill="#c47b3e" />
+  <polygon points="40.00,40.00 660.00,40.00 900.00,250.00 280.00,250.00" fill="#d89a59" />
+    <polygon points="280.00,250.00 900.00,250.00 900.00,680.00 280.00,680.00" fill="#d79a57" />
+
+    <g opacity="0.92">
+        <polygon points="143.44,130.51 763.44,130.51 796.56,159.49 176.56,159.49" fill="#e20074" />
+        <polygon points="328.00,40.00 372.00,40.00 612.00,250.00 568.00,250.00" fill="#e20074" />
+        <polygon points="40.00,233.00 280.00,443.00 280.00,487.00 40.00,277.00" fill="#cb0068" />
+        <polygon points="143.44,130.51 176.56,159.49 176.56,589.49 143.44,560.51" fill="#cb0068" />
+        <polygon points="280.00,443.00 900.00,443.00 900.00,487.00 280.00,487.00" fill="#d7006e" />
+        <polygon points="568.00,250.00 612.00,250.00 612.00,680.00 568.00,680.00" fill="#d7006e" />
+  </g>
+
+    <polygon points="354.40,327.40 524.40,327.40 524.40,437.40 354.40,437.40" fill="#d39a5b" opacity="0.22" />
+
+  <g clip-path="url(#clip-top)">
+    <text x="310.00" y="184.96" transform="matrix(1.000000 0.000000 0.752577 0.658505 40.00 40.00)" fill="black" opacity="0.84" font-family="Arial Black, Arial, sans-serif" font-size="186.91" font-weight="900" text-anchor="middle" dominant-baseline="middle" lengthAdjust="spacingAndGlyphs" textLength="508.40">Pack</text>
+  </g>
+  <g clip-path="url(#clip-left)">
+    <text x="159.45" y="249.40" transform="matrix(0.752577 0.658505 0.000000 1.000000 40.00 40.00)" fill="black" opacity="0.80" font-family="Arial Black, Arial, sans-serif" font-size="96.14" font-weight="900" text-anchor="middle" dominant-baseline="middle" lengthAdjust="spacingAndGlyphs" textLength="261.50">2The</text>
+  </g>
+  <g clip-path="url(#clip-front)">
+    <text x="310.00" y="249.40" transform="matrix(1.000000 0.000000 0.000000 1.000000 280.00 250.00)" fill="black" opacity="0.76" font-family="Arial Black, Arial, sans-serif" font-size="180.60" font-weight="900" text-anchor="middle" dominant-baseline="middle" lengthAdjust="spacingAndGlyphs" textLength="508.40">Root</text>
+  </g>
+  <g clip-path="url(#clip-front)">
+    <text x="310.00" y="387.00" transform="matrix(1.000000 0.000000 0.000000 1.000000 280.00 250.00)" fill="black" opacity="0.76" font-family="Arial Black, Arial, sans-serif" font-size="58.61" font-weight="900" text-anchor="middle" dominant-baseline="middle" lengthAdjust="spacingAndGlyphs" textLength="558.00">CVE-2026-41651</text>
+  </g>
+
+        <g fill="none" stroke-width="5.00" stroke-linecap="butt" stroke-linejoin="round">
+    <line x1="40.00" y1="40.00" x2="328.00" y2="40.00" stroke="#8a5524" />
+    <line x1="328.00" y1="40.00" x2="372.00" y2="40.00" stroke="#e20074" />
+    <line x1="372.00" y1="40.00" x2="660.00" y2="40.00" stroke="#8a5524" />
+    <line x1="40.00" y1="40.00" x2="143.44" y2="130.51" stroke="#8a5524" />
+    <line x1="143.44" y1="130.51" x2="176.56" y2="159.49" stroke="#e20074" />
+    <line x1="176.56" y1="159.49" x2="280.00" y2="250.00" stroke="#8a5524" />
+    <line x1="660.00" y1="40.00" x2="763.44" y2="130.51" stroke="#8a5524" />
+    <line x1="763.44" y1="130.51" x2="796.56" y2="159.49" stroke="#e20074" />
+    <line x1="796.56" y1="159.49" x2="900.00" y2="250.00" stroke="#8a5524" />
+    <line x1="280.00" y1="250.00" x2="568.00" y2="250.00" stroke="#8a5524" />
+    <line x1="568.00" y1="250.00" x2="612.00" y2="250.00" stroke="#e20074" />
+    <line x1="612.00" y1="250.00" x2="900.00" y2="250.00" stroke="#8a5524" />
+    <line x1="280.00" y1="250.00" x2="280.00" y2="443.00" stroke="#8a5524" />
+    <line x1="280.00" y1="443.00" x2="280.00" y2="487.00" stroke="#e20074" />
+    <line x1="280.00" y1="487.00" x2="280.00" y2="680.00" stroke="#8a5524" />
+    <line x1="900.00" y1="250.00" x2="900.00" y2="443.00" stroke="#8a5524" />
+    <line x1="900.00" y1="443.00" x2="900.00" y2="487.00" stroke="#e20074" />
+    <line x1="900.00" y1="487.00" x2="900.00" y2="680.00" stroke="#8a5524" />
+    <line x1="280.00" y1="680.00" x2="568.00" y2="680.00" stroke="#8a5524" />
+    <line x1="568.00" y1="680.00" x2="612.00" y2="680.00" stroke="#e20074" />
+    <line x1="612.00" y1="680.00" x2="900.00" y2="680.00" stroke="#8a5524" />
+    <line x1="40.00" y1="40.00" x2="40.00" y2="233.00" stroke="#8a5524" />
+    <line x1="40.00" y1="233.00" x2="40.00" y2="277.00" stroke="#e20074" />
+    <line x1="40.00" y1="277.00" x2="40.00" y2="470.00" stroke="#8a5524" />
+    <line x1="40.00" y1="470.00" x2="143.44" y2="560.51" stroke="#8a5524" />
+    <line x1="143.44" y1="560.51" x2="176.56" y2="589.49" stroke="#e20074" />
+    <line x1="176.56" y1="589.49" x2="280.00" y2="680.00" stroke="#8a5524" />
+  </g>
+  </g>
+</svg>
