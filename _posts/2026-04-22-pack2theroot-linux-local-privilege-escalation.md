@@ -1,7 +1,7 @@
 ---
-title: 'Pack2TheRoot: Cross-Distro Local Privilege Escalation Vulnerability'
-header: 'Pack2TheRoot: Cross-Distro Local Privilege Escalation Vulnerability'
-og_description: 'Pack2TheRoot is a local privilege escalation (LPE) vulnerability that affects multiple Linux distributions in default installations.'
+title: 'Pack2TheRoot (CVE-2026-41651): Cross-Distro Local Privilege Escalation Vulnerability'
+header: 'Pack2TheRoot (CVE-2026-41651): Cross-Distro Local Privilege Escalation Vulnerability'
+og_description: 'Pack2TheRoot (CVE-2026-41651) is a local privilege escalation (LPE) vulnerability that affects multiple Linux distributions in default installations.'
 og_image: '/assets/images/Pack2TheRoot/Pack2TheRoot.png'
 tags: ['advisories']
 cwes: ['CWE-367 (Time-of-check Time-of-use (TOCTOU) Race Condition)']
@@ -13,13 +13,12 @@ vulnerability_release_date: '2026-04-20'
 
 Today we publicly disclose a high-severity vulnerability (CVSS 3: 8.8) - in coordination with distro maintainers - that affects multiple Linux distributions in their default installations.
 The Pack2TheRoot vulnerability can be exploited by any local unprivileged user to obtain root access on a vulnerable system. <!--more-->
-**A CVE number assignment is still pending. This blog post will be updated accordingly.**
 
 The vulnerability lies in the [PackageKit daemon](https://github.com/PackageKit/PackageKit), a cross-distro package management abstraction layer.
 
 The vulnerability enables an unprivileged attacker to install or remove system packages without authorization. This can be exploited to gain full root access or compromise the system in other ways.
 
-The Pack2TheRoot vulnerability was discovered by Deutsche Telekom's Red Team during targeted research into local privilege escalation vectors on modern Linux systems.
+The Pack2TheRoot (CVE-2026-41651) vulnerability was discovered by Deutsche Telekom's Red Team during targeted research into local privilege escalation vectors on modern Linux systems.
 PackageKit as a candidate initially caught our attention when we observed that a `pkcon install` command could install a system package without requiring a password on a Fedora Workstation.
 Starting in 2025, we began investigating whether this behavior could be abused to achieve arbitrary package installation.
 By guiding the AI-assisted research into a specific direction (using Claude Opus by Anthropic) we were able to discover an exploitable vulnerability.
@@ -96,11 +95,12 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-19: Privately informed distribution vendors through [distros mailing list](https://oss-security.openwall.org/wiki/mailing-lists/distros), shared patch and publication date
 - 2026-04-21: Reaffirmed the publication date with distribution maintainers 
 - 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://oss-security.openwall.org/wiki/mailing-lists) and this blog post.
+- 2026-04-22: Got CVE-2026-41651 assigned
 
 ### Advisories
 
 - GitHub Security Advisory [GHSA-f55j-vvr9-69xv](https://github.com/PackageKit/PackageKit/security/advisories/GHSA-f55j-vvr9-69xv)
-
+- [CVE-2026-41651](https://www.cve.org/CVERecord?id=CVE-2026-41651)
 
 *The images in this article are free to use, as long as a reference to this blog post is provided.*
 
