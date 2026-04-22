@@ -126,7 +126,7 @@ A [SVG version](/assets/images/Pack2TheRoot/Pack2TheRoot.svg) of the Pack2TheRoo
 }
 
 .img-small {
-  width: 90%;
+  width: 80%;
   max-width: 100%;
   height: auto;
 }
