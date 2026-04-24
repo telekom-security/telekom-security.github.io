@@ -54,7 +54,8 @@ First check if PackageKit is installed on your system and compare it with [vulne
 Note `grep`'s `-i` flag, as the package may be installed in camel case as `PackageKit`.
 
 To check if the PackageKit daemon is available, run `systemctl status packagekit` or `pkmon`.
-If `systemctl` shows it as `loaded` or `running`, or `pkmon` shows transaction output, the daemon is active and your system is potentially exploitable if unpatched.
+If `systemctl` shows it as `loaded` or `running` or the PackageKit monitor tools show transaction output, the daemon is active and your system is potentially exploitable if unpatched. 
+For PackageKit `< 1.3.3` test `pkmon`, for versions `>= 1.3.3` use `pkgcli monitor` to test for output.
 
 **Updated Packages**
 
