@@ -68,6 +68,11 @@ In the following, we link the Distros package overviews, that show Distro specif
 
 ### Workaround
 
+**Disclaimer:** The following workaround is provided "as is", without warranty of any kind, express or implied. Use at your own risk. Test thoroughly in your environment before deploying to production systems.
+
+This workaround has the sideffect that GUI software centers (GNOME Software, etc.) will no longer be able to install packages. Users must use `sudo yum/dnf install` from the terminal.
+Package installs via `yum`/`dnf` are unaffected since they don't use PackageKit.
+
 Systems that do not have an available patch, can be secured by deploying a PolicyKit rule file as a workaround.
 For polkit 0.106+  place a rulefile in `/etc/polkit-1/rules.d/49-workaround-cve-2026-41651.rules`:
 
@@ -94,11 +99,6 @@ polkit.addRule(function(action, subject) {
     }
 });
 ```
-
-This workaround has the sideffect that GUI software centers (GNOME Software, etc.) will no longer be able to install packages. Users must use `sudo yum/dnf install` from the terminal.
-Package installs via `yum`/`dnf` are unaffected since they don't use PackageKit.
-
-**Disclaimer:** This workaround is provided "as is", without warranty of any kind, express or implied. Use at your own risk. Test thoroughly in your environment before deploying to production systems.
 
 ### Indicators of compromise (IOC) {#indicators-of-compromise}
 
