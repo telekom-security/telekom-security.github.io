@@ -54,7 +54,8 @@ First check if PackageKit is installed on your system and compare it with [vulne
 Note `grep`'s `-i` flag, as the package may be installed in camel case as `PackageKit`.
 
 To check if the PackageKit daemon is available, run `systemctl status packagekit` or `pkmon`.
-If `systemctl` shows it as `loaded` or `running`, or `pkmon` shows transaction output, the daemon is active and your system is potentially exploitable if unpatched.
+If `systemctl` shows it as `loaded` or `running` or the PackageKit monitor tools show transaction output, the daemon is active and your system is potentially exploitable if unpatched. 
+For PackageKit `< 1.3.3` test `pkmon`, for versions `>= 1.3.3` use `pkgcli monitor` to test for output.
 
 **Updated Packages**
 
@@ -65,7 +66,39 @@ In the following, we link the Distros package overviews, that show Distro specif
 - Ubuntu: [https://bugs.launchpad.net/bugs/cve/2026-41651](https://bugs.launchpad.net/bugs/cve/2026-41651)
 - Fedora 42 - 44: Fixed in PackageKit-1.3.4-3 [https://koji.fedoraproject.org/koji/packageinfo?packageID=5206](https://koji.fedoraproject.org/koji/packageinfo?packageID=5206)
 
+### Workaround
 
+Systems that do not have an available patch, can be secured by deploying a PolicyKit rule file as a workaround.
+For polkit 0.106+  place a rulefile in `/etc/polkit-1/rules.d/49-workaround-cve-2026-41651.rules`:
+
+```javascript
+// CVE-2026-41651 workaround: immediately deny PackageKit install actions
+// without dispatching to an authentication agent.
+// This prevents the transaction flag race by ensuring the polkit denial
+// arrives before the scheduler's idle callback can fire.
+
+polkit.addRule(function(action, subject) {
+    if (action.id === "org.freedesktop.packagekit.package-install-untrusted" ||
+        action.id === "org.freedesktop.packagekit.package-install" ||
+        action.id === "org.freedesktop.packagekit.package-reinstall" ||
+        action.id === "org.freedesktop.packagekit.package-downgrade" ||
+        action.id === "org.freedesktop.packagekit.system-update") {
+
+        // Allow root (uid 0) — needed for legitimate admin operations
+        if (subject.uid === 0) {
+            return polkit.Result.YES;
+        }
+
+        // Deny all non-root users immediately (no agent interaction)
+        return polkit.Result.NO;
+    }
+});
+```
+
+This workaround has the sideffect that GUI software centers (GNOME Software, etc.) will no longer be able to install packages. Users must use `sudo yum/dnf install` from the terminal.
+Package installs via `yum`/`dnf` are unaffected since they don't use PackageKit.
+
+**Disclaimer:** This workaround is provided "as is", without warranty of any kind, express or implied. Use at your own risk. Test thoroughly in your environment before deploying to production systems.
 
 ### Indicators of compromise (IOC) {#indicators-of-compromise}
 
@@ -123,10 +156,10 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-15: Shared patch with Red Hat and Canonical
 - 2026-04-19: Privately informed distribution vendors through [distros mailing list](https://oss-security.openwall.org/wiki/mailing-lists/distros), shared patch and publication date
 - 2026-04-21: Reaffirmed the publication date with distribution maintainers 
-- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://oss-security.openwall.org/wiki/mailing-lists) and this blog post.
+- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://www.openwall.com/lists/oss-security/2026/04/22/6) and this blog post.
 - 2026-04-22: Got CVE-2026-41651 assigned
 - 2026-04-23: Public exploit available on GitHub
-- 2026-04-29: Updated blog article with technical details
+- 2026-04-29: Updated blog article with technical details and propose for workaround
 
 ### Advisories
 
