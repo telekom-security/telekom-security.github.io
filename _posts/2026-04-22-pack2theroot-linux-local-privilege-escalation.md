@@ -54,7 +54,8 @@ First check if PackageKit is installed on your system and compare it with [vulne
 Note `grep`'s `-i` flag, as the package may be installed in camel case as `PackageKit`.
 
 To check if the PackageKit daemon is available, run `systemctl status packagekit` or `pkmon`.
-If `systemctl` shows it as `loaded` or `running`, or `pkmon` shows transaction output, the daemon is active and your system is potentially exploitable if unpatched.
+If `systemctl` shows it as `loaded` or `running` or the PackageKit monitor tools show transaction output, the daemon is active and your system is potentially exploitable if unpatched. 
+For PackageKit `< 1.3.3` test `pkmon`, for versions `>= 1.3.3` use `pkgcli monitor` to test for output.
 
 **Updated Packages**
 
@@ -123,7 +124,7 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-15: Shared patch with Red Hat and Canonical
 - 2026-04-19: Privately informed distribution vendors through [distros mailing list](https://oss-security.openwall.org/wiki/mailing-lists/distros), shared patch and publication date
 - 2026-04-21: Reaffirmed the publication date with distribution maintainers 
-- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://oss-security.openwall.org/wiki/mailing-lists) and this blog post.
+- 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://www.openwall.com/lists/oss-security/2026/04/22/6) and this blog post.
 - 2026-04-22: Got CVE-2026-41651 assigned
 - 2026-04-23: Public exploit available on GitHub
 - 2026-04-29: Updated blog article with technical details
