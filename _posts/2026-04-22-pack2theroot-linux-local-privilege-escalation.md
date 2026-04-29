@@ -66,7 +66,39 @@ In the following, we link the Distros package overviews, that show Distro specif
 - Ubuntu: [https://bugs.launchpad.net/bugs/cve/2026-41651](https://bugs.launchpad.net/bugs/cve/2026-41651)
 - Fedora 42 - 44: Fixed in PackageKit-1.3.4-3 [https://koji.fedoraproject.org/koji/packageinfo?packageID=5206](https://koji.fedoraproject.org/koji/packageinfo?packageID=5206)
 
+### Workaround
 
+**Disclaimer:** The following workaround is provided "as is", without warranty of any kind, express or implied. Use at your own risk. Test thoroughly in your environment before deploying to production systems.
+
+This workaround has the sideffect that GUI software centers (GNOME Software, etc.) will no longer be able to install packages. Users must use `sudo yum/dnf install` from the terminal.
+Package installs via `yum`/`dnf` are unaffected since they don't use PackageKit.
+
+Systems that do not have an available patch, can be secured by deploying a PolicyKit rule file as a workaround.
+For polkit 0.106+  place a rulefile in `/etc/polkit-1/rules.d/49-workaround-cve-2026-41651.rules`:
+
+```javascript
+// CVE-2026-41651 workaround: immediately deny PackageKit install actions
+// without dispatching to an authentication agent.
+// This prevents the transaction flag race by ensuring the polkit denial
+// arrives before the scheduler's idle callback can fire.
+
+polkit.addRule(function(action, subject) {
+    if (action.id === "org.freedesktop.packagekit.package-install-untrusted" ||
+        action.id === "org.freedesktop.packagekit.package-install" ||
+        action.id === "org.freedesktop.packagekit.package-reinstall" ||
+        action.id === "org.freedesktop.packagekit.package-downgrade" ||
+        action.id === "org.freedesktop.packagekit.system-update") {
+
+        // Allow root (uid 0) — needed for legitimate admin operations
+        if (subject.uid === 0) {
+            return polkit.Result.YES;
+        }
+
+        // Deny all non-root users immediately (no agent interaction)
+        return polkit.Result.NO;
+    }
+});
+```
 
 ### Indicators of compromise (IOC) {#indicators-of-compromise}
 
@@ -127,7 +159,7 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://www.openwall.com/lists/oss-security/2026/04/22/6) and this blog post.
 - 2026-04-22: Got CVE-2026-41651 assigned
 - 2026-04-23: Public exploit available on GitHub
-- 2026-04-29: Updated blog article with technical details
+- 2026-04-29: Updated blog article with technical details and propose for workaround
 
 ### Advisories
 
