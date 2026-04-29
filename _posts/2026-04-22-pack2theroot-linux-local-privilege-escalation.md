@@ -82,14 +82,32 @@ Apr 18 09:56:36 Rocky10 packagekitd[2082]: Bail out! PackageKit:ERROR:../src/pk-
 
 ### Technical Details {#technical-details}
 
-We currently do not share technical details on the root cause of the vulnerability.
-We plan to add them at a later point in time here.
+The vulnerability is a time-of-check-time-of-use (TOCTOU) race condition in PackageKit's D-Bus transaction handling.
+
+**PackageKit and Transaction Flags**
+
+PackageKit is a D-Bus system service that runs as root and delegates authorization to [polkit](https://github.com/polkit-org/polkit). When a client wants to install a package, it creates a transaction object over D-Bus and calls a method such as `InstallFiles(flags, [path])`.
+
+The `flags` parameter is a bitfield that controls the transaction's behavior. Certain flag values (such as `SIMULATE` and `ONLY_DOWNLOAD`) cause PackageKit to skip polkit authorization entirely, because the operations they represent are considered safe: they should never modify the system.
+
+**The Root Cause**
+
+The core issue is that PackageKit's transaction handler unconditionally overwrites the cached transaction flags on every `InstallFiles` call, without verifying the transaction's current state. There is no guard ensuring the transaction is still in its initial state. A second call on the same transaction can overwrite the flags even after the transaction has already been authorized and is running.
+
+PackageKit's state machine does have a guard against backward state transitions, but it rejects them silently. The flag overwrite happens *before* the state transition is attempted, so the corrupted flags remain in effect while the transaction continues to run.
+
+When the transaction is eventually executed, the scheduler reads the *current* value of the cached flags. If the safety flags have been stripped by a subsequent call, the backend performs a real operation instead of the originally authorized safe one.
+
+**GLib Event Loop Ordering**
+
+A key property that makes this exploitable is GLib's main loop priority system: D-Bus messages are dispatched at a higher priority than idle callbacks. The scheduler executes transactions through idle callbacks, which means any pending D-Bus message is *always* processed first. This creates a reliable window for the flag overwrite to land before the transaction actually executes.
+
 
 #### Proof-of-Concept
 
 We have developed a working proof-of-concept that reliably exploits this vulnerability to achieve root code execution from an unprivileged local user on default installations of various distributions. However, the PoC code is not being shared publicly at this time for obvious reasons.
 
-![Proof-of-Concept Screenshot](/assets/images/Pack2TheRoot/pack2theroot-poc.png){: .img-small }
+![Proof-of-Concept Screenshot](/assets/images/Pack2TheRoot/pack2theroot-poc2.png){: .img-small }
 
 ### Credits
 
@@ -108,6 +126,8 @@ If you have questions regarding the vulnerability or are interested in our [secu
 - 2026-04-21: Reaffirmed the publication date with distribution maintainers 
 - 2026-04-22: PackageKit patch release and public disclosure through [oss-security mailing list](https://www.openwall.com/lists/oss-security/2026/04/22/6) and this blog post.
 - 2026-04-22: Got CVE-2026-41651 assigned
+- 2026-04-23: Public exploit available on GitHub
+- 2026-04-29: Updated blog article with technical details
 
 ### Advisories
 
