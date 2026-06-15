@@ -7,6 +7,7 @@ tags: ['advisories']
 cwes: ['CWE-367 (Time-of-check Time-of-use (TOCTOU) Race Condition)']
 affected_product: 'PackageKit'
 vulnerability_release_date: '2026-04-20'
+cve: ['CVE-2026-41651']
 ---
 
 

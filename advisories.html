@@ -10,7 +10,7 @@ As part of the Security Community, we actively support vulnerability research. H
 <!--
 
     Lists the vulnerabilities retrieved from:
-    - posts (needed values: vulnerability_release_date, affected_product, cwes)
+    - posts (needed values: vulnerability_release_date, affected_product, cwes, cve)
 -->
 
 
@@ -29,6 +29,7 @@ As part of the Security Community, we actively support vulnerability research. H
             <table width="100%">
                 <tr>
                     <th>Date</th>
+                    <th>CVE</th>
                     <th>Product</th>
                     <th>Vulnerabilty Type</th>
                     <th>Details</th>
@@ -38,10 +39,15 @@ As part of the Security Community, we actively support vulnerability research. H
             <td width="10%">
                 {{ vul.vulnerability_release_date | date:"%m/%Y" }}
             </td>
-            <td width="40%">
+            <td width="15%">
+                {% if vul.cve %}
+                    {{ vul.cve | join: ", " }}
+                {% endif %}
+            </td>
+            <td width="30%">
                 {{ vul.affected_product }}
             </td>  
-            <td width="40%">
+            <td width="35%">
                 {% assign cwe_info = vul.cwes  | join: ", " | replace: '-', '&#8209;' %}
                 {{ cwe_info }}
                 

@@ -6,6 +6,9 @@ tags: ['advisories']
 cwes: ['Integer Overflow or Wraparound (CWE-190)']
 affected_product: 'MatrixSSL'
 vulnerability_release_date: '2023-12-15'
+cve: ['CVE-2023-24609']
+
+
 ---
 A new critical DoS vulnerability (CVE-2023-24609) was discovered in the matrixssl library (versions 4.6.0-4.0.0, github.com/matrixssl/matrixssl) by Security Evaluators of Telekom Security with modern fuzzing methods.
 

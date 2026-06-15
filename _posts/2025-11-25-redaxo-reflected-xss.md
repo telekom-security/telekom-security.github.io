@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Improper Neutralization of Input During Web Page Generation (CWE-79)']
 affected_product: 'REDAXO CMS'
 vulnerability_release_date: '2025-11-25'
+cve: ['CVE-2025-66026']
 ---
 
 A reflected Cross-Site Scripting vulnerability (CVE-2025-66026) has been identified in the REDAXO Mediapool component. The issue allows arbitrary JavaScript execution in the backend when a user visits a specially crafted link while authenticated. <!--more-->

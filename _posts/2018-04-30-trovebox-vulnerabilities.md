@@ -6,6 +6,8 @@ tags: ['advisories']
 cwes: ['SQL Injection (CWE-89)']
 affected_product: 'Trovebox'
 vulnerability_release_date: '2018-04-30'
+cve: ['CVE-2018-1000551', 'CVE-2018-1000552',               'CVE-2018-1000553', 'CVE-2018-1000554']
+
 ---
 Trovebox, a photo sharing and management application, is prone to several critical
 vulnerabilities. Exploiting is trivial and it is recommended to update

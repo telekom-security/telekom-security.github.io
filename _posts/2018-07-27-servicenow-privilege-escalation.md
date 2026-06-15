@@ -6,6 +6,8 @@ tags: ['advisories']
 cwes: ['Code Injection (CWE-94)']
 affected_product: 'ServiceNow'
 vulnerability_release_date: '2018-07-27'
+cve: ['CVE-2018-7748']
+
 ---
 ServiceNow, an enterprise IT service management solution, is vulnerable to an template
 injection vulnerability, leading to a full privilege escalation.

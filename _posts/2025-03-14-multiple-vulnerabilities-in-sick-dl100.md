@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['CWE-494 (Download of Code Without Integrity Check)', 'CWE-319 (Cleartext Transmission of Sensitive Information)', 'CWE-328 (Use of Weak Hash)']
 affected_product: 'SICK DL100-2xxxxxxx all firmware versions'
 vulnerability_release_date: '2025-03-14'
+cve: ['CVE-2025-27593', 'CVE-2025-27594', 'CVE-2025-27595']
 ---
 
 Several vulnerabilities were discovered during testing of a DL100 device.<!--more-->

@@ -4,7 +4,8 @@ header: Tuta Mail Vulnerability - Client Information Leak
 tags: ['advisories']  
 cwes: ['Server-Side Request Forgery (SSRF) (CWE-918)']  
 affected_product: 'Tuta Mail'  
-vulnerability_release_date: '2024-01-22' 
+vulnerability_release_date: '2024-01-22'
+cve: ['CVE-2024-23330']
 ---
 
 An client information leak vulnerability (CVE-2024-23330) has been identified in Tuta Mail. This vulnerability could leak client information by loading external resources in the mail even if disabled.<!--more-->

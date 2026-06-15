@@ -6,6 +6,7 @@ tags: ['advisories']
 cwes: ['Missing Authentication for Critical Function (CWE-306)']
 affected_product: 'Teamwire (Android)'
 vulnerability_release_date: '2020-06-10'
+cve: ['CVE-2020-12621']
 ---
 A pass code bypass in the mobile application of Teamwire for Android allows an attacker with physical access to the phone to use the app without entering the valid pass code. 
 <!--more-->

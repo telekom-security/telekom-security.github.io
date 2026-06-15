@@ -5,6 +5,7 @@ tags: ['advisories', 'writeup']
 cwes: ['Improper Limitation of a Pathname to a Restricted Directory (Path Traversal) (CWE-22)']
 affected_product: 'Kanboard'
 vulnerability_release_date: '2024-11-11'
+cve: ['CVE-2024-51747', 'CVE-2024-55603']
 ---
 
 This article is a continuation of a write-up series, where we discuss web application vulnerabilities found during red team operations. This time, the target was the Kanboard software. <!--more-->

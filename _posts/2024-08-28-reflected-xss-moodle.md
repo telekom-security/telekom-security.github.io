@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Cross-site Scripting (CWE-79)']
 affected_product: 'Moodle'
 vulnerability_release_date: '2024-08-19'
+cve: ['CVE-2024-43439']
 ---
 
 A reflected cross-site scripting (XSS) vulnerability (CVE-2024-43439) has been identified in Moodle, allowing an attacker to execute arbitrary JavaScript within the context of a Moodle website when a victim visits a specially crafted link.<!--more-->
