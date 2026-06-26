@@ -11,4 +11,4 @@ gem "rake", "~> 13.2"
 gem "webrick", "~> 1.8"
 gem "bundler-audit", "~> 0.9"
 
-gem "tzinfo-data", platforms: [:windows, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

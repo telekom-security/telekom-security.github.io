@@ -41,7 +41,6 @@
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --content-width: 1120px;
   --reading-width: 780px;
-  --article-text-width: 900px;
   --radius: 8px;
 }
 
@@ -710,7 +709,7 @@ table {
 
 .article-shell .post-header,
 .article-shell .content {
-  max-width: var(--article-text-width);
+  max-width: var(--content-width);
   margin-left: auto;
   margin-right: auto;
 }
@@ -726,7 +725,7 @@ table {
 }
 
 .article-shell .post-header h1 {
-  max-width: 30ch;
+  max-width: 100%;
 }
 
 .post-tags {
@@ -760,7 +759,7 @@ table {
 }
 
 .article-shell .article-image {
-  max-width: var(--article-text-width);
+  max-width: var(--content-width);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1015,7 +1014,20 @@ table {
 .advisory-table {
   width: 100%;
   min-width: 760px;
+  table-layout: fixed;
   border-collapse: collapse;
+}
+
+.advisory-table__date {
+  width: 7rem;
+}
+
+.advisory-table__product {
+  width: 28%;
+}
+
+.advisory-table__details {
+  width: 7rem;
 }
 
 .advisory-table th,
@@ -1030,6 +1042,18 @@ table {
   background: var(--surface-3);
   color: var(--text);
   font-weight: 900;
+}
+
+.advisory-table th:first-child,
+.advisory-table td:first-child,
+.advisory-table th:last-child,
+.advisory-table td:last-child {
+  white-space: nowrap;
+}
+
+.advisory-table th:last-child,
+.advisory-table td:last-child {
+  text-align: right;
 }
 
 .advisory-table tr:last-child td {
