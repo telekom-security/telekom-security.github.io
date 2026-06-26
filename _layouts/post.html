@@ -1,39 +1,44 @@
 ---
 layout: default
 ---
-<article id="post-page">
-	<h2>{%if page.header %}{{ page.header }}{% else %}{{ page.title }}{% endif %}</h2>		
-	<time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
-	<div class="content">
-		{%- if page.og_image and page.og_image != '/img/favicon.png' %}
-		<a href="{{ page.og_image }}"><img src="{{ page.og_image }}" alt="" class="post__image post__image--article"></a>
-		{%- endif %}
 
-		{{ content }}
-		
-	</div>
+{%- assign display_title = page.header | default: page.title -%}
+{%- assign article_image = page.og_image | default: page.image -%}
+{%- capture primary_category -%}{% include category-label.html tags=page.tags %}{%- endcapture -%}
+
+<article class="article-shell">
+  <header class="post-header">
+    <p class="eyebrow eyebrow--signal">{{ primary_category | strip }}</p>
+    <h1>{{ display_title }}</h1>
+    <p class="post-meta post-meta--article">
+      <span>
+        {% include icon.html name="calendar-days" size="16" %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %d, %Y" }}</time>
+      </span>
+      <span>
+        {% include icon.html name="user-round" size="16" %}
+        {{ page.author | default: site.author.name }}
+      </span>
+    </p>
+    {%- if page.tags and page.tags.size > 0 %}
+    <div class="post-tags" aria-label="Post tags">
+      {%- for tag in page.tags %}
+      <span class="post-tag">
+        {% include icon.html name="tag" size="14" %}
+        {% include tag-label.html tag=tag %}
+      </span>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </header>
+
+  {%- if article_image and article_image != "/img/favicon.png" and article_image != "/img/telekom_security.png" %}
+  <a class="article-image" href="{{ article_image | relative_url }}">
+    <img src="{{ article_image | relative_url }}" alt="" loading="eager">
+  </a>
+  {%- endif %}
+
+  <div class="content">
+    {{ content }}
+  </div>
 </article>
-
-<!-- Image modal -->
-<div id="img-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);cursor:pointer;align-items:center;justify-content:center;">
-	<img id="img-modal-src" style="max-width:90vw;max-height:90vh;border-radius:4px;box-shadow:0 0 30px rgba(0,0,0,.6);" alt="">
-</div>
-
-<script>
-(function(){
-	var modal = document.getElementById('img-modal');
-	var modalImg = document.getElementById('img-modal-src');
-	document.getElementById('post-page').addEventListener('click', function(e){
-		var img = e.target.closest('img');
-		if(!img) return;
-		e.preventDefault();
-		modalImg.src = img.src;
-		modal.style.display = 'flex';
-	});
-	modal.addEventListener('click', function(){
-		modal.style.display = 'none';
-		modalImg.src = '';
-	});
-})();
-</script>
-

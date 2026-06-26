@@ -1,0 +1,5 @@
+<ul class="post-list">
+  {%- for post in include.posts %}
+    {% include post-card.html post=post show_tags=include.show_tags %}
+  {%- endfor %}
+</ul>

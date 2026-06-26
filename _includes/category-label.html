@@ -1,0 +1,9 @@
+{%- assign category_label = site.data.categories.fallback -%}
+{%- for tag in include.tags -%}
+  {%- assign tag_key = tag | strip -%}
+  {%- if site.data.categories[tag_key] -%}
+    {%- assign category_label = site.data.categories[tag_key] -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- category_label -}}

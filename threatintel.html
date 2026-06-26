@@ -1,19 +1,13 @@
 ---
 layout: default
+permalink: /threatintel.html
+title: Threat Intel
 ---
-<!-- Posts -->
 
-<ul id="posts">
-    <ul>
-    {% for post in site.tags['ThreatIntel'] %}
+<section class="page-heading">
+  <p class="eyebrow">Threat Intelligence</p>
+  <h1>Threat Intel</h1>
+  <p>Campaign analysis, actor tradecraft, and operational security observations from Telekom Security.</p>
+</section>
 
-    <li class="post">
-        <h2><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">{%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}</a></h2>
-        <time datetime="{{ post.date | date_to_xmlschema }}" class="by-line"> <i>{{ post.date | date_to_string }}</i> </time>
-        <p>{{ post.excerpt }}</p>
-      <p><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">Continue Reading &rarr;</a></p>
-    </li>
-
-    {% endfor %}
-    </ul>
-</ul>
+{% include post-list.html posts=site.tags.ThreatIntel %}

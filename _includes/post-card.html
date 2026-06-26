@@ -1,0 +1,31 @@
+{%- assign post = include.post -%}
+{%- assign post_title = post.header | default: post.title -%}
+{%- assign post_image = post.og_image | default: post.image -%}
+{%- capture category -%}{% include category-label.html tags=post.tags %}{%- endcapture -%}
+<li class="post-card">
+  {%- if post_image and post_image != "/img/favicon.png" and post_image != "/img/telekom_security.png" %}
+  <a class="post-card__image" href="{{ post.url | relative_url }}" aria-label="Read {{ post_title | escape }}">
+    <img src="{{ post_image | relative_url }}" alt="" loading="lazy">
+  </a>
+  {%- endif %}
+  <div class="post-card__body">
+    <p class="post-card__meta">
+      <span>
+        {% include icon.html name="calendar-days" size="15" %}
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %d, %Y" }}</time>
+      </span>
+      {%- unless include.show_tags == false %}
+      <span>
+        {% include icon.html name="tag" size="15" %}
+        {{ category | strip }}
+      </span>
+      {%- endunless %}
+    </p>
+    <h2><a href="{{ post.url | relative_url }}">{{ post_title }}</a></h2>
+    <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 240 }}</p>
+    <a class="text-link" href="{{ post.url | relative_url }}">
+      Continue Reading
+      {% include icon.html name="arrow-right" size="16" %}
+    </a>
+  </div>
+</li>

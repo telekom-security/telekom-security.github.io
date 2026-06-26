@@ -168,35 +168,3 @@ If you have questions regarding the vulnerability or are interested in our [secu
 
 *The images in this article are free to use, as long as a reference to this blog post is provided.*
 A [SVG version](/assets/images/Pack2TheRoot/Pack2TheRoot.svg) of the Pack2TheRoot Logo is also available.
-
-<style>
-.content {
-    display: block;
-    text-align: justify;
-}
-#h4 {
-    font-size: 1em !important;
-}
-
-.img-small {
-  width: 80%;
-  max-width: 100%;
-  height: auto;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelectorAll(".obf").forEach(el => {
-      const encoded = el.dataset.obf;
-      try {
-        const decoded = atob(atob(encoded));
-        el.textContent = decoded;
-      } catch (e) {
-        el.textContent = "unknown";
-      }
-    });
-  }, 1500); // 1.5s delay
-});
-</script>
