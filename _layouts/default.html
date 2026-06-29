@@ -1,72 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark" data-resolved-theme="dark">
+  {% include head.html %}
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+    <div class="site-shell">
+      {% include header.html %}
+      <main id="content" class="site-main">
+        {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
 
-{% include head.html %}
+    <div class="image-modal" data-image-modal hidden>
+      <button type="button" class="image-modal__close" data-image-modal-close aria-label="Close image preview">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <img alt="" data-image-modal-img>
+    </div>
 
-<body>
-	<div id="wrap">
-	  	
-	  	<!-- Navigation -->
-      {%- if site.navigation_menu == true %}
-        {% include menu.html %}
-      {%- endif %}
-
-    <!-- Icon menu -->
-	  <a {% if site.reverse == true %}id="nav-menu-left"{% else %}id="nav-menu"{% endif %}>
-	  	<div id="menu"></div>
-	  </a>
-
-      <!-- Header -->
-      {%- if site.custom_header == true %}
-        {% include header-custom.html %}
-      {%- else %}
-        {% include header.html %}
-      {%- endif %}
-
-    <!-- Main content -->
-	  <div id="container">
-		  
-		<main>
-
-			{{ content }}
-
-	  </main>
-		
-		  <!-- Pagination links -->
-      {%- if paginator.total_pages > 1 %}
-        <div class="pagination">
-          {%- if paginator.previous_page == 1 %}
-            <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&laquo;</a>
-          {%- elsif paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&laquo;</a>
-          {%- else %}
-            <span class="page-item">&laquo;</span>
-          {%- endif -%}
-          {%- for page in (1..paginator.total_pages) -%}
-            {%- if page == paginator.page %}
-              <span class="page-item">{{ page }}</span>
-            {%- elsif page == 1 %}
-              <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">{{ page }}</a>
-            {%- else %}
-              <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}" class="page-item">{{ page }}</a>
-            {%- endif -%}
-          {%- endfor %}
-          {%- if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="page-item">&raquo;</a>
-          {%- else %}
-            <span class="page-item">&raquo;</span>
-          {%- endif %}
-        </div>
-      {%- endif %}
-
-	  </div>
-	    
-	    <!-- Footer -->
-	    {% include footer.html %}
-
-	    <!-- Script -->
-      {% include script.html %}
-
-	</div>
-</body>
+    {% include script.html %}
+  </body>
 </html>
