@@ -216,9 +216,3 @@ Timeline:
 * **2024-12-08:** Vendor has reported that the vulnerability will be fixed in next release.
 * **2024-12-18:** Kanboard 1.2.43 has been released with the fix.
 * **2025-05-08:** This blog post was published.
-
-<style>
-img {
-  border: 1px solid #555;
-}
-</style>
