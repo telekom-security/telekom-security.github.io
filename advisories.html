@@ -54,12 +54,17 @@ title: Security Advisories
       <td>{{ vul.affected_product }}</td>
       <td>
         {% if vul.cve %}
-            {{ vul.cve | join: ", " }}
+        <ul>
+          {% for cve in vul.cve %}<li>{{ cve }}</li>{% endfor %}
+        </ul>
         {% endif %}
       </td>
       <td>
-        {% assign cwe_info = vul.cwes | join: ", " | replace: "-", "&#8209;" %}
-        {{ cwe_info }}
+        {% if vul.cwes %}
+        <ul>
+          {% for cwe in vul.cwes %}<li>{{ cwe | replace: "-", "&#8209;" }}</li>{% endfor %}
+        </ul>
+        {% endif %}
       </td>
       <td>
         {% assign post_url = vul.url | strip %}
