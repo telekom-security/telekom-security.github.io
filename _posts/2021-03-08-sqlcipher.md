@@ -6,6 +6,7 @@ tags: ['advisories']
 cwes: ['NULL Pointer Dereference (CWE-476)']
 affected_product: 'SQLCipher'
 vulnerability_release_date: '2021-03-08'
+cve: ['CVE-2020-27207']
 ---
 A new critical denial-of-service vulnerability (CVE-2021-3119) in the SQLCipher SQL command processing of the master branch was discovered with a self-developed SQLCipher-FAST (Fast Automated Software Testing) framework.
 

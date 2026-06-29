@@ -6,6 +6,7 @@ tags: ['advisories']
 cwes: ['(Possible) Exposure of Sensitive Information to an Unauthorized Actor (CWE-200)']
 affected_product: 'Certain HP LaserJet Pro Printers'
 vulnerability_release_date: '2024-05-23'
+cve: ['CVE-2024-5143']
 ---
 
 In a red team engagement, anything can be a target, and depending on what has already been looted (or not), everything *will* be a target - even as a form of desperation.

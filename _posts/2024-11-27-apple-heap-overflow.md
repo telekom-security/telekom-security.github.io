@@ -4,7 +4,8 @@ header: Apple ARKit Vulnerability - Heap Overflow
 tags: ['advisories']  
 cwes: ['Out-of-bounds Write (CWE-787)']  
 affected_product: 'Apple iOS/iPadOS, macOS and more'  
-vulnerability_release_date: '2024-09-16'  
+vulnerability_release_date: '2024-09-16'
+cve: ['CVE-2024-44126']
 ---
 
 A heap corruption vulnerability (CVE-2024-44126) has been identified in several Apple products that use the ARKit component. This vulnerability could compromise the security of devices when processing a specially crafted file. <!--more-->

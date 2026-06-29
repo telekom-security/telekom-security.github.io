@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['CWE-78 (Improper Neutralization of Special Elements used in an OS Command)', 'CWE-798 (Use of Hard-coded Credentials)', 'CWE-327 (Use of a Broken or Risky Cryptographic Algorithm)', 'CWE-732 (Incorrect Permission Assignment for Critical Resource)']
 affected_product: 'Janitza UMG 96RM-E firmware versions below 3.14'
 vulnerability_release_date: '2025-11-04'
+cve: ['CVE-2025-41709', 'CVE-2025-41710', 'CVE-2025-41711', 'CVE-2025-41712']
 ---
 
 Several vulnerabilities were discovered during testing of a Janitza UMG 96RM-E device.<!--more-->

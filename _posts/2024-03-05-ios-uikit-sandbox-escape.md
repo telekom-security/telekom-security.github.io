@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Improper Input Validation (CWE-20)']
 affected_product: 'Apple iOS/iPadOS, macOS and more'
 vulnerability_release_date: '2024-03-05'
+cve: ['CVE-2024-23246']
 ---
 
 A vulnerability has been identified in various Apple devices, including iPhones, posing a significant risk. The vulnerability affects the UIKit component. <!--more-->Users are strongly encouraged to update their devices to the latest version to protect their data.

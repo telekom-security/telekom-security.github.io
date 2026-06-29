@@ -1022,8 +1022,12 @@ table {
   width: 7rem;
 }
 
+.advisory-table__cve {
+  width: 20%;
+}
+
 .advisory-table__product {
-  width: 28%;
+  width: 12%;
 }
 
 .advisory-table__details {
@@ -1058,6 +1062,17 @@ table {
 
 .advisory-table tr:last-child td {
   border-bottom: 0;
+}
+
+.advisory-table td ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style-position: outside;
+}
+
+.advisory-table td ul li {
+  margin: 0;
+  padding: 0;
 }
 
 .site-footer {

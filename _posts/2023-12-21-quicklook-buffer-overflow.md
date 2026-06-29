@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Buffer Copy without Checking Size of Input (CWE-120)']
 affected_product: 'Apple iOS/iPadOS, macOS and more'
 vulnerability_release_date: '2023-06-23'
+cve: ['CVE-2023-32401']
 ---
 
 A  vulnerability has been identified in Apple's Quick Look feature that affects Apple's macOS. The vulnerability, classified as a classic buffer overflow, was addressed with improved bounds checking. <!--more-->Users are strongly encouraged to update their devices to the latest version to protect their data.

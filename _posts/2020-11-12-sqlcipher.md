@@ -6,6 +6,8 @@ tags: ['advisories']
 cwes: ['Use After Free (CWE-416)']
 affected_product: 'SQLCipher'
 vulnerability_release_date: '2020-11-12'
+cve: ['CVE-2020-27207']
+
 ---
 A new critical denial of service vulnerability (Use CVE-2020-27207) in the SQLCipher SQL command processing of the master branch (https://github.com/sqlcipher) was discovered with a self-developed SQLCipher-FAST (Fast Automated Software Testing) framework.
 

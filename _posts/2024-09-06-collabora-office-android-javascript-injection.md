@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Improper Neutralization of Encoded URI Schemes in a Web Page (CWE-84)']
 affected_product: 'Collabora Office for Android'
 vulnerability_release_date: '2024-08-29'
+cve: ['CVE-2024-45045']
 ---
 
 A JavaScript Injection vulnerability (CVE-2024-45045) has been identified in Collabora Office for Android, allowing an attacker to execute arbitrary JavaScript within the context of the Android App when a victim opens a specially crafted document.<!--more-->

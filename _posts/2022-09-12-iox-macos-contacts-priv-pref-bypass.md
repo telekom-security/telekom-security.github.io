@@ -5,6 +5,7 @@ tags: ['advisories']
 cwes: ['Improper Input Validation (CWE-20)']
 affected_product: 'Apple iOS/iPadOS, macOS'
 vulnerability_release_date: '2022-09-12'
+cve: ['CVE-2022-32854']
 ---
 
 A vulnerability has been identified in iOS/iPadOS < 15.7 / < 16.0 and macOS Big Sur < 11.7 that allows an app to bypass Privacy preferences, posing a significant risk. The vulnerability, classified as Improper Input Validation affects the Contacts component. <!--more-->Users are strongly encouraged to update their devices to the latest version to protect their data.

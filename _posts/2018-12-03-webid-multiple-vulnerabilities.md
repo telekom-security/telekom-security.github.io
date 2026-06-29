@@ -6,6 +6,8 @@ tags: ['advisories']
 cwes: ['SQL Injection (CWE-89)', 'Cross-site Scripting (CWE-79)', 'Path Traversal (CWE-22)']
 affected_product: 'WeBid Directory'
 vulnerability_release_date: '2018-12-03'
+cve: ['CVE-2018-1000867', 'CVE-2018-1000868', 'CVE-2018-1000882']
+
 ---
 Multiple vulnerabilities were identified in version 1.2.2 of the popular "WeBid" open source auction system. Patches for all three vulnerabilities are available in their GitHub, and will be included in the next release.
 

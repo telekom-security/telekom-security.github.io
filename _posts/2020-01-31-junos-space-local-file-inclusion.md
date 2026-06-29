@@ -6,6 +6,9 @@ tags: ['advisories']
 cwes: ['External Control of File Name or Path (CWE-73)']
 affected_product: 'Juniper Networks Junos Space '
 vulnerability_release_date: '2020-01-15'
+cve: ['CVE-2020-1611']
+
+
 ---
 A Local File Inclusion vulnerability (CVE-2020-1611) in Juniper Networks Junos Space allows an attacker to view all files on the target when the device receives malicious HTTP packets.
 

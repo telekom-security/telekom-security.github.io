@@ -4,7 +4,8 @@ header: Tuta Mail Vulnerability - DoS
 tags: ['advisories']  
 cwes: ['Improper Input Validation (CWE-20)']  
 affected_product: 'Tuta Mail'  
-vulnerability_release_date: '2024-01-25'  
+vulnerability_release_date: '2024-01-25'
+cve: ['CVE-2024-23655']
 ---
 
 A denial of service vulnerability (CVE-2024-23655) has been identified in Tuta Mail. This vulnerability could prevent users from accessing and reading received mails when an attacker sends a manipulated mail.<!--more-->
