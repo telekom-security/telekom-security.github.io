@@ -1,0 +1,21 @@
+services:
+  demo:
+    build:
+      context: .
+      dockerfile: Containerfile.dev
+    command:
+      - bundle
+      - exec
+      - jekyll
+      - serve
+      - --host
+      - 0.0.0.0
+      - --livereload
+      - --incremental
+      - --config
+      - _config.yml,_config_demo.yml
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    volumes:
+      - .:/site

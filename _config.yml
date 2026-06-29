@@ -1,44 +1,49 @@
-# Site settings
 title: Telekom Security
 description: "Telekom Security research and publications"
 url: "https://github.security.telekom.com"
+baseurl: ""
 author:
   name: "Telekom Security"
 
-# Build settings
-baseurl: / # Change this to your relative path (ex: /blog/), or leave just a /
 markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
 source: .
 destination: ./_site
 permalink: /:year/:month/:title.html
 paginate: 8
 paginate_path: /page:num/
-
 excerpt_separator: <!--more-->
 
-# Default values
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
 
-exclude:
-  - Contribute.md
-
-# Plugins
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
-# Custom variables
-version: "1.0.0"
+navigation:
+  - title: Home
+    url: /
+  - title: Honeypots
+    url: /honeypot.html
+  - title: Advisories
+    url: /advisories.html
+  - title: Threat Intel
+    url: /threatintel.html
 
-# Options
-custom_header: false
-custom_nav_footer: false
-reverse: false
-navigation_menu: true
-theme: jekyll-theme-slate
+exclude:
+  - README.md
+  - Rakefile
+  - Gemfile
+  - Gemfile.lock
+  - Containerfile.dev
+  - compose.yaml
+  - vendor
+  - .bundle
+  - .github

@@ -1,22 +1,50 @@
-<header id="header" class="parent justify-spaceBetween">
-  <div class="inner w100 relative">
-    <span class="f-left">  
-      <a href="/">
-        <h1>
-          <span>Telekom</span> Security
-        </h1>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="{{ "/" | relative_url }}" aria-label="Telekom Security home">
+      <span class="brand__mark">Telekom</span>
+      <span class="brand__name">Security</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      {%- for item in site.navigation %}
+        {%- assign item_url = item.url | relative_url -%}
+        {%- assign current_url = page.url | relative_url -%}
+        <a href="{{ item_url }}"{% if current_url == item_url or page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {%- endfor %}
+      <a class="site-nav__social" href="https://x.com/DTCERT">
+        <span class="site-nav__social-icon" aria-hidden="true"></span>
+        <span>@DTCERT</span>
       </a>
-    </span>
-    <span id="nav-links" class="absolute right bottom">
-      {%- for page in site.pages -%}
-        {%- if page.layout == "page" -%}
-	        <a href="{% if site.baseurl == "/" %}{{ page.url }}{% else %}{{ page.url | prepend: site.baseurl }}{% endif %}" title="{{ page.title }}">{{ page.title }}</a>
-        {%- endif -%}
-      {%- endfor -%}
-	    {% include link.html %}
-    </span>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        data-theme-value="dark"
+        aria-label="Theme: Dark. Activate for Light."
+      >
+        <span class="theme-toggle__icon theme-toggle__icon--system" aria-hidden="true">
+          {% include icon.html name="monitor" size="17" %}
+        </span>
+        <span class="theme-toggle__icon theme-toggle__icon--light" aria-hidden="true">
+          {% include icon.html name="sun" size="17" %}
+        </span>
+        <span class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true">
+          {% include icon.html name="moon" size="17" %}
+        </span>
+      </button>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-label="Open navigation"
+      >
+        {% include icon.html name="menu" size="20" %}
+      </button>
+    </div>
   </div>
 </header>
-
-
-

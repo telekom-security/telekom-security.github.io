@@ -1,0 +1,6 @@
+{%- assign tag_label = include.tag | strip -%}
+{%- if tag_label == "ThreatIntel" -%}
+  Threat Intel
+{%- else -%}
+  {{- tag_label | capitalize -}}
+{%- endif -%}

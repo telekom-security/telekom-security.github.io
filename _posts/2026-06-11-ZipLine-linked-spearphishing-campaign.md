@@ -51,14 +51,14 @@ Unlike the `.LNK` file, the two Microsoft Word documents do not contain malware.
 The `.LNK` file executes a short but obfuscated PowerShell script. After deobfuscation, the script performs the following actions:
 
 1. Searches for the original ZIP archive in these Locations: 
-	- `Downloads`
-	- `Documents`
-	- `Desktop`
+   - `Downloads`
+   - `Documents`
+   - `Desktop`
 
-	If the ZIP archive does not exist in one of these locations, or if the victim saved the downloaded file elsewhere, the malware stops execution.
+   If the ZIP archive does not exist in one of these locations, or if the victim saved the downloaded file elsewhere, the malware stops execution.
 2. Performs an AMSI bypass by replacing the `AmsiUtils.ScanContent` method pointer with a method pointer to a benign PowerShell method created solely for this purpose.
 3. Reads the original downloaded ZIP archive as a raw file, searches for the marker string `SwbWu`, and extracts another PowerShell snippet hidden after this marker. The archive is not parsed as a ZIP container at this stage. The hidden snippet can be viewed and extracted with a hex editor.
-- Executes the extracted PowerShell snippet.
+   - Executes the extracted PowerShell snippet.
 
 ![Hex view of the ZIP archive](/assets/images/zipline/hexedit-2.png){: .img-small }
 *Figure 5: Hex view of the ZIP archive. The marker string and PowerShell code are highlighted.*
@@ -68,35 +68,47 @@ The content hidden inside the ZIP archive is the actual backdoor. Its capabiliti
 The backdoor performs the following actions:
 
 1. Extracts the contents of the original ZIP archive to 
+
    ```
    %LOCALAPPDATA%\<ARCHIV FILENAME>
    ```
+
 2. Opens the decoy document `ROSSMANN_Kandidatenbrochure.docx` to distract the victim.
 3. Creates a scheduled task that runs every day at 11:00. This task executes the `.LNK` file and serves as the persistence mechanism. The name of the scheduled task is 
+
    ```
    <VICTIM-ID>c582
    ```
+
 4. Creates a victim fingerprint:
-	- Victim ID: CRC32 of the value from 
-	   ```
-	   HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductId
-	   ```
-	- Campaign ID: CRC32 of the original ZIP archive
+   - Victim ID: CRC32 of the value from
+
+     ```
+     HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductId
+     ```
+
+   - Campaign ID: CRC32 of the original ZIP archive
 5. Creates a Mutex named:
+
    ```
    Global\<VictimID>
    ```
+
 6. Constructs a domain name later used as the command and control server for the backdoor. This domain is also a `herokuapp[.]com`-subdomain.
 7. Communicates with the C2 server using the following URL pattern: 
-```
-https://*[.]herokuapp[.]com/<VictimID>c582<xor_hex(VictimID, "[]0")><unix_timestamp_hex><random_hex>
-```
+
+   ```
+   https://*[.]herokuapp[.]com/<VictimID>c582<xor_hex(VictimID, "[]0")><unix_timestamp_hex><random_hex>
+   ```
+
 8. Requests this URL every four to six minutes. The HTTP response is decrypted using XOR with the Victim ID as the key and then evaluated. 
 9. Uses the following User-Agent string for C2 communication: 
+
    ```
    Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
    ```
-	This is a valid User-Agent string for Google Chrome on Microsoft Windows 10. Chrome version 140 was published in September 2025.
+
+   This is a valid User-Agent string for Google Chrome on Microsoft Windows 10. Chrome version 140 was published in September 2025.
 
 The backdoor supports three C2 command types:
 
@@ -136,6 +148,7 @@ While the malware itself is not complex, it provides the attacker with enough fl
 The campaign also shows the continued abuse of legitimate cloud services and tunneling technologies. Heroku-hosted infrastructure and Cloudflare Tunnel can make malicious activity harder to distinguish from normal cloud traffic, which increases the importance of behavioral detection and forensic artifact analysis.
 
 Defenders should monitor for PowerShell execution from shortcut files, unusual scheduled tasks, unexpected `cloudflared` executions, and network connections to known attacker-controlled cloud infrastructure. The following section provides additional details to support hunting, investigation, and response.
+
 ## Appendix
 
 ### IOCs
