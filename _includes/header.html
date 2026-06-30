@@ -11,9 +11,8 @@
         {%- assign current_url = page.url | relative_url -%}
         <a href="{{ item_url }}"{% if current_url == item_url or page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
       {%- endfor %}
-      <a class="site-nav__social" href="https://x.com/DTCERT">
+      <a class="site-nav__social" href="https://www.linkedin.com/showcase/technical-security-insights-t-security/" aria-label="Technical Security Insights on LinkedIn">
         <span class="site-nav__social-icon" aria-hidden="true"></span>
-        <span>@DTCERT</span>
       </a>
     </nav>
 
