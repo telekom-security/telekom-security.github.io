@@ -329,9 +329,28 @@ table {
 }
 
 .site-nav__social {
+  position: relative;
   justify-content: center;
   width: 2.25rem;
+  margin-left: 0.45rem;
   padding: 0;
+}
+
+.site-nav__social::before {
+  content: "";
+  position: absolute;
+  left: -0.35rem;
+  top: 50%;
+  width: 1px;
+  height: 1.1rem;
+  background: var(--border-strong);
+  opacity: 0.75;
+  transform: translateY(-50%);
+}
+
+.site-nav a.site-nav__social:hover,
+.site-nav a.site-nav__social:focus-visible {
+  color: #0a66c2;
 }
 
 .site-nav__social-icon {
@@ -1165,6 +1184,14 @@ table {
 
   .site-nav a[aria-current="page"] {
     box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .site-nav__social {
+    margin-left: 0;
+  }
+
+  .site-nav__social::before {
+    display: none;
   }
 
   .header-actions {
