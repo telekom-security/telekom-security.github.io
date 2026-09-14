@@ -1,5 +1,10 @@
-# Threat Research: systemchk - DACH-Targeted VPN Credential Theft Toolkit
-
+---
+title: 'systemchk - DACH-Targeted VPN Credential Theft Toolkit'
+header: 'systemchk - DACH-Targeted VPN Credential Theft Toolkit'
+og_description: 'Decryption and analysis of a VPN credential theft toolkit recovered from a blocked intrusion targeting the DACH region.'
+tags: ['ThreatIntel']
+author: 'Nico Thelen'
+---
 
 ## Description
 
@@ -54,12 +59,12 @@ The archive was encrypted with ZipCrypto. Unlike AES-encrypted ZIPs, ZipCrypto i
 
 This showed all filenames, compression methods, and CRC32 checksums. ZipCrypto leaves these in the clear. Among the files were ADExplorer.exe and Eula.txt - the standard contents of the Sysinternals AD Explorer download. We downloaded the official package from Microsoft and compared the CRC32 values:
 
-![CRC32 match between encrypted archive and official Sysinternals download, confirming unmodified binaries and enabling known-plaintext attack](vpn-credential-theft/01_crc32_comparison.png)
+![CRC32 match between encrypted archive and official Sysinternals download, confirming unmodified binaries and enabling known-plaintext attack](/assets/images/vpn-credential-theft/01_crc32_comparison.png)
 > Figure 1 - CRC32 match between encrypted archive and official Sysinternals download, confirming unmodified binaries and enabling known-plaintext attack. 
 
 We packed our copy of Eula.txt into a reference ZIP and ran bkcrack:
 
-![bkcrack recovering the three internal ZipCrypto encryption keys in 12 seconds](vpn-credential-theft/02_bkcrack_attack.png)
+![bkcrack recovering the three internal ZipCrypto encryption keys in 12 seconds](/assets/images/vpn-credential-theft/02_bkcrack_attack.png)
 > Figure 2 - bkcrack recovering the three internal ZipCrypto encryption keys in 12 seconds. 
 
 bkcrack recovered three internal encryption keys (d2aa4c9c 31872287 dbec421b). These keys apply to the entire archive because ZipCrypto derives all entry keys from a single password. We used them to produce a decrypted copy and then recovered the original password:
@@ -101,7 +106,7 @@ The victim is flooded with spam E-Mails. Shortly after, the attacker contacts th
 
 SecUp.bat runs in the foreground. It shows an ASCII-art "SECURITY UPDATE" banner, prompts for credentials, plays a 34-second spinner ("Applying security patches..."), and pings real Microsoft domains under the label "Connecting to update servers." The script does not contain any network call or file write for the entered credentials - they appear to be discarded.
 
-![SecUp.bat source: ASCII "SECURITY UPDATE" banner, credential prompt, and fake connection spinner](vpn-credential-theft/03_fake-banner.png)
+![SecUp.bat source: ASCII "SECURITY UPDATE" banner, credential prompt, and fake connection spinner](/assets/images/vpn-credential-theft/03_fake-banner.png)
 > Figure 3 - SecUp.bat source: ASCII "SECURITY UPDATE" banner, credential prompt, and fake connection spinner. 
 
 #### Phase 3 - Credential Harvesting
@@ -164,7 +169,7 @@ Both installation variants establish the same tunnel:
     Public Key:   l1GkwsaYrZyZat4pvImzq8BI0xxb3s2RxH7imf5mDEo
     Short ID:     a1eeb9b9eb
 
-![Xray tunnel installer script: VPS address, UUID, REALITY parameters, sideloading paths, and persistence setup](vpn-credential-theft/04_xray_tunnel.png)
+![Xray tunnel installer script: VPS address, UUID, REALITY parameters, sideloading paths, and persistence setup](/assets/images/vpn-credential-theft/04_xray_tunnel.png)
 > Figure 4 - Xray tunnel installer script: VPS address, UUID, REALITY parameters, sideloading paths, and persistence setup. 
 
 REALITY disguises a connection as a TLS connection to a legitimate target such as dl.google.com. Unlike domain fronting, REALITY operates at the TLS layer: It emulates a normal browser ClientHello and reproduces characteristics of the target's TLS handshake. Passive inspection has limited visibility. However, TLS fingerprints, SNI and the destination IP/ASN can still provide useful indicators. In this case, the strongest indicator is the inconsistency between SNI=dl.google.com and destination 74.0.42.157.
@@ -179,8 +184,8 @@ Persistence: HKCU Run key "RemoteAppConnectionBroker" pointing to the copied wks
 
 The sideloading pair: wkspbroker.exe (Windows Remote Desktop Connection Broker, copied from System32) loads radcui.dll (the renamed version.dll). The script places the DLL next to wkspbroker.exe, indicating that the binary imports radcui.dll - this has not been verified against the PE import table.
 
-![version.dll file properties showing 31 MB PE32+ DLL — several times larger than a legitimate Windows version DLL](vpn-credential-theft/05_sideloading_dll.png)
-> Figure 5 - version.dll file properties showing 31.5 MB PE32+ DLL – several times larger than a legitimate Windows version DLL. 
+![version.dll file properties showing 31 MB PE32+ DLL — several times larger than a legitimate Windows version DLL](/assets/images/vpn-credential-theft/05_sideloading_dll.png)
+> Figure 5 - version.dll file properties showing ~31 MB PE32+ DLL – several times larger than a legitimate Windows version DLL. 
 
 
 Variant B - Direct Download (online):
@@ -199,7 +204,7 @@ After downloading, xray.exe is renamed to a legitimate looking ConnectivityHost.
 
 A 32-bit Windows GUI application (314 KB). String analysis shows German UI text and references to %APPDATA%\PolicyMgr. It appears to present a fake login dialog and write captured credentials to the PolicyMgr directory. About 250 KB of the binary is padding: generic XML paragraphs about "configuration profiles", "backup operations" and "logging subsystems" repeated in varying order. This inflates the file size, lowers entropy, and buries the interesting strings in noise. The binary is signed with a valid code-signing certificate (see below) and has zero detections on VirusTotal.
 
-![Embedded German UI strings in ValidateUPD.exe: login dialog labels, PolicyMgr output path, and invalid-credentials error message](vpn-credential-theft/06_validateupd_strings.png)
+![Embedded German UI strings in ValidateUPD.exe: login dialog labels, PolicyMgr output path, and invalid-credentials error message](/assets/images/vpn-credential-theft/06_validateupd_strings.png)
 > Figure 6 - Embedded German UI strings in ValidateUPD.exe: login dialog labels, PolicyMgr output path, and invalid-credentials error message. 
  
 
@@ -213,7 +218,7 @@ Both binaries (ValidateUPD.exe and version.dll) are signed with the same certifi
     Signed:     2026-08-31 17:06 UTC
     Status:     Valid, not revoked (as of 2026-09-05)
 
-![Valid code signature on ValidateUPD.exe, issued to YOUR CHANCE j.d.o.o (Zagreb) via SSL.com](vpn-credential-theft/07_codesign.png)
+![Valid code signature on ValidateUPD.exe, issued to YOUR CHANCE j.d.o.o (Zagreb) via SSL.com](/assets/images/vpn-credential-theft/07_codesign.png)
 > Figure 7 - Valid code signature on ValidateUPD.exe, issued to YOUR CHANCE j.d.o.o (Zagreb) via SSL.com. 
 
 ## Indicator of Compromise
