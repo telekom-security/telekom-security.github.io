@@ -49,13 +49,13 @@ The initial access method and the use of SSL.com code-signing certificates regis
 
 #### Origin
 
-The archive (systemchk.zip) was obtained from an attacker-operated Dropbox share link (file ID 982pwmfxt04hkfk8yy6i2), downloaded on 04.09.2026. The link points to a single file. The initial access vector is known from case context: The attacker uses E-Mail bombing followed by a phone call or Microsoft Teams message impersonating IT support. The victim is convinced to open Quick Assist (quickassist.exe), which gives the attacker remote control of the endpoint. Through this session the attacker delivers and unpacks the toolkit.
+The archive (`systemchk.zip`) was obtained from an attacker-operated Dropbox share link (file ID 982pwmfxt04hkfk8yy6i2), downloaded on 04.09.2026. The link points to a single file. The initial access vector is known from case context: The attacker uses E-Mail bombing followed by a phone call or Microsoft Teams message impersonating IT support. The victim is convinced to open Quick Assist (quickassist.exe), which gives the attacker remote control of the endpoint. Through this session the attacker delivers and unpacks the toolkit.
 
 #### Decryption
 
 The archive was encrypted with ZipCrypto. Unlike AES-encrypted ZIPs, ZipCrypto is vulnerable to known-plaintext attacks - if you have the original version of any file in the archive, you can recover the encryption keys without knowing the password. We saved the download locally as attacker.zip and started by listing the archive contents without decrypting:
 
-    7z l -slt attacker.zip | grep -E 'Path|Method|CRC'
+`7z l -slt attacker.zip | grep -E 'Path|Method|CRC'`
 
 This showed all filenames, compression methods, and CRC32 checksums. ZipCrypto leaves these in the clear. Among the files were ADExplorer.exe and Eula.txt - the standard contents of the Sysinternals AD Explorer download. We downloaded the official package from Microsoft and compared the CRC32 values:
 
@@ -69,7 +69,7 @@ We packed our copy of Eula.txt into a reference ZIP and ran bkcrack:
 
 bkcrack recovered three internal encryption keys (d2aa4c9c 31872287 dbec421b). These keys apply to the entire archive because ZipCrypto derives all entry keys from a single password. We used them to produce a decrypted copy and then recovered the original password:
 
-    bkcrack -k d2aa4c9c 31872287 dbec421b -r 12 ?p
+`bkcrack -k d2aa4c9c 31872287 dbec421b -r 12 ?p`
 
 The password is 2026. Useful as an indicator when encountering other archives from the same or similar campaigns. The choice of ZipCrypto over AES is an operational security mistake by the attacker. It gave us full access to their tooling and TTPs - the top of the Pyramid of Pain.
 
@@ -111,7 +111,7 @@ SecUp.bat runs in the foreground. It shows an ASCII-art "SECURITY UPDATE" banner
 
 #### Phase 3 - Credential Harvesting
 
-Two tools target different credential sources and may run in parallel or serve as alternatives depending on the target environment: ValidateUPD.exe shows a fake Windows login dialog with German UI text. Based on string fragments in the binary ("\PolicyM", "policyM", and a German error message about invalid credentials), it appears to write captured credentials to %APPDATA%\PolicyMgr. This would target the user's Windows or domain password directly. UpdateReadiness.bat / .ps1 silently scans the disk for VPN configuration files and cached credentials. Output goes to %APPDATA%\PolicyMgr\policyMgr.bkp - the same directory, which serves as the central collection point.
+Two tools target different credential sources and may run in parallel or serve as alternatives depending on the target environment: ValidateUPD.exe shows a fake Windows login dialog with German UI text. Based on string fragments in the binary ("\PolicyM", "policyM", and a German error message about invalid credentials), it appears to write captured credentials to `%APPDATA%\PolicyMgr`. This would target the user's Windows or domain password directly. UpdateReadiness.bat / .ps1 silently scans the disk for VPN configuration files and cached credentials. Output goes to `%APPDATA%\PolicyMgr\policyMgr.bkp` - the same directory, which serves as the central collection point.
 
 #### Phase 4 - Persistent Reverse Tunnel
 
@@ -126,7 +126,7 @@ ADExplorer.exe (unmodified Sysinternals binary) can create Active Directory snap
 
 #### Phase 6 - Exfiltration
 
-CheckKB.bat / .ps1 upload the collected files from %APPDATA%\PolicyMgr\ via HTTPS POST to a Microsoft Dev Tunnels endpoint: hxxps://sdj4mqcf-8443.use.devtunnels[.]ms/
+CheckKB.bat / .ps1 upload the collected files from `%APPDATA%\PolicyMgr\` via HTTPS POST to a Microsoft Dev Tunnels endpoint: `hxxps://sdj4mqcf-8443.use.devtunnels[.]ms/`
 
 Authentication is hardcoded as Basic Auth in a Base64-encoded format, after decoding the credentials are visible: u9q7eg09pvu:KSFg_Oq9p7vmu_vh4fcZZZ__
 
@@ -172,7 +172,7 @@ Both installation variants establish the same tunnel:
 ![Xray tunnel installer script: VPS address, UUID, REALITY parameters, sideloading paths, and persistence setup](/assets/images/vpn-credential-theft/04_xray_tunnel.png)
 > Figure 4 - Xray tunnel installer script: VPS address, UUID, REALITY parameters, sideloading paths, and persistence setup. 
 
-REALITY disguises a connection as a TLS connection to a legitimate target such as dl.google.com. Unlike domain fronting, REALITY operates at the TLS layer: It emulates a normal browser ClientHello and reproduces characteristics of the target's TLS handshake. Passive inspection has limited visibility. However, TLS fingerprints, SNI and the destination IP/ASN can still provide useful indicators. In this case, the strongest indicator is the inconsistency between SNI=dl.google.com and destination 74.0.42.157.
+REALITY disguises a connection as a TLS connection to a legitimate target such as dl.google.com. Unlike domain fronting, REALITY operates at the TLS layer: It emulates a normal browser ClientHello and reproduces characteristics of the target's TLS handshake. Passive inspection has limited visibility. However, TLS fingerprints, SNI and the destination IP/ASN can still provide useful indicators. In this case, the strongest indicator is the inconsistency between SNI=dl.google.com and destination `74.0.42.157`.
 
 Each victim gets a unique bridge domain passed as a script parameter (e.g. h5.tunnel, h12.tunnel), so the attacker can manage multiple hosts through one VPS.
 
@@ -180,7 +180,7 @@ Variant A - DLL Sideloading (offline):
 
 The 31.5 MB version.dll in the archive is not a real Windows version DLL (~30 KB). It is the Xray client compiled as a Go shared library. Go module strings in the binary confirm xray-core v1.260327.0 with REALITY v0.0.0-20260322, built from the GitHub repository VanyaKrotov/xray_cshare, which has since been deleted. This wrapper was maybe built to make xray-core loadable as a DLL for sideloading.
 
-Persistence: HKCU Run key "RemoteAppConnectionBroker" pointing to the copied wkspbroker.exe. The directory is hidden (attrib +h) and the batch file deletes itself after execution.
+Persistence: HKCU Run key `"RemoteAppConnectionBroker"` pointing to the copied `wkspbroker.exe`. The directory is hidden (attrib +h) and the batch file deletes itself after execution.
 
 The sideloading pair: wkspbroker.exe (Windows Remote Desktop Connection Broker, copied from System32) loads radcui.dll (the renamed version.dll). The script places the DLL next to wkspbroker.exe, indicating that the binary imports radcui.dll - this has not been verified against the PE import table.
 
@@ -198,11 +198,11 @@ When sideloading is not an option, the scripts download Xray from a cascade of s
 4. Azure Container Apps - file-node-neu (North Europe)
 5. Azure Web Apps - file-node-us (US)
 
-After downloading, xray.exe is renamed to a legitimate looking ConnectivityHost.exe and placed in %LocalAppData%\ConnectivityService\Agent. The two Azure instances appear to be attacker-operated: They follow a consistent naming pattern (file-node-*) and share an authentication token (dl-9f27ab3qx7). The PS1 version adds string-level obfuscation: path strings are fragmented ('Connect' + 'ivityService'), download URLs are Base64-encoded, and the filename xray.exe is assembled from character codes. Persistence uses a hidden svchost.dat file containing the start script, with the Run key pointing to powershell.exe -W Hidden -EP Bypass loading it.
+After downloading, xray.exe is renamed to a legitimate looking ConnectivityHost.exe and placed in `%LocalAppData%\ConnectivityService\Agent`. The two Azure instances appear to be attacker-operated: They follow a consistent naming pattern (file-node-*) and share an authentication token (dl-9f27ab3qx7). The PS1 version adds string-level obfuscation: path strings are fragmented ('Connect' + 'ivityService'), download URLs are Base64-encoded, and the filename `xray.exe` is assembled from character codes. Persistence uses a hidden svchost.dat file containing the start script, with the Run key pointing to powershell.exe -W Hidden -EP Bypass loading it.
 
 #### Credential Harvester - ValidateUPD.exe
 
-A 32-bit Windows GUI application (314 KB). String analysis shows German UI text and references to %APPDATA%\PolicyMgr. It appears to present a fake login dialog and write captured credentials to the PolicyMgr directory. About 250 KB of the binary is padding: generic XML paragraphs about "configuration profiles", "backup operations" and "logging subsystems" repeated in varying order. This inflates the file size, lowers entropy, and buries the interesting strings in noise. The binary is signed with a valid code-signing certificate (see below) and has zero detections on VirusTotal.
+A 32-bit Windows GUI application (314 KB). String analysis shows German UI text and references to `%APPDATA%\PolicyMgr`. It appears to present a fake login dialog and write captured credentials to the PolicyMgr directory. About 250 KB of the binary is padding: generic XML paragraphs about "configuration profiles", "backup operations" and "logging subsystems" repeated in varying order. This inflates the file size, lowers entropy, and buries the interesting strings in noise. The binary is signed with a valid code-signing certificate (see below) and has zero detections on VirusTotal.
 
 ![Embedded German UI strings in ValidateUPD.exe: login dialog labels, PolicyMgr output path, and invalid-credentials error message](/assets/images/vpn-credential-theft/06_validateupd_strings.png)
 > Figure 6 - Embedded German UI strings in ValidateUPD.exe: login dialog labels, PolicyMgr output path, and invalid-credentials error message. 
@@ -210,7 +210,7 @@ A 32-bit Windows GUI application (314 KB). String analysis shows German UI text 
 
 ### Code-Signing Certificate
 
-Both binaries (ValidateUPD.exe and version.dll) are signed with the same certificate. SSL.com code-signing certificates registered to shell companies are a documented path in the criminal ecosystem [2][3]. Code-signing certificates come in two validation tiers: OV verifies that the applying organization exists, EV adds stricter identity checks and requires a hardware token.
+Both binaries (`ValidateUPD.exe` and `version.dll`) are signed with the same certificate. SSL.com code-signing certificates registered to shell companies are a documented path in the criminal ecosystem [2][3]. Code-signing certificates come in two validation tiers: OV verifies that the applying organization exists, EV adds stricter identity checks and requires a hardware token.
 
     Subject:    YOUR CHANCE j.d.o.o (Zagreb, Croatia)
     Issuer:     SSL.com Code Signing Intermediate CA RSA R1
@@ -272,10 +272,10 @@ Both binaries (ValidateUPD.exe and version.dll) are signed with the same certifi
 ## Recommendation / Learning
 
 - If artifacts from this toolkit are found in an environment, rotate VPN credentials for all affected users - not just local passwords. The attacker's goal is not the compromised endpoint but the VPN gateway into the corporate network.
-- Block or alert on connections to 74.0.42.157 (the Xray VPS) and the Dev Tunnels endpoint (sdj4mqcf-8443.use.devtunnels.ms). The two Azure staging domains (file-node-neu...azurecontainerapps.io and file-node-us.azurewebsites.net) can be blocked at the domain level.
+- Block or alert on connections to `74.0.42.157` (the Xray VPS) and the Dev Tunnels endpoint (`sdj4mqcf-8443.use.devtunnels.ms`). The two Azure staging domains (file-node-neu...azurecontainerapps.io and file-node-us.azurewebsites.net) can be blocked at the domain level.
 - For broader REALITY TLS detection beyond this specific campaign, alert on any TLS connection where the SNI is dl.google.com but the destination IP is not in Google's published ranges.
 - If *.devtunnels.ms is not used by development teams, consider blocking it entirely. Dev Tunnels as an exfiltration channel is not unique to this operator.
-- The code-signing certificate (66096FE6AAB808036B840F230F5606A5, issued to YOUR CHANCE j.d.o.o via SSL.com) is assessed with Moderate confidence to be the strongest cross-campaign correlation indicator available.
+- The code-signing certificate (`66096FE6AAB808036B840F230F5606A5`, issued to YOUR CHANCE j.d.o.o via SSL.com) is assessed with Moderate confidence to be the strongest cross-campaign correlation indicator available.
 - Both standalone executables in the archive are validly signed and undetected by any antivirus engine. Signature-based detection alone does not cover this toolkit.
 
 
