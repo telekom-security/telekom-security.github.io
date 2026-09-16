@@ -115,20 +115,20 @@ An Xray/V2Ray reverse tunnel with REALITY TLS is installed. Two variants cover d
 
 The harvester scans the system for VPN configuration files and cached credentials. The batch version covers nine products - the PowerShell version adds Zscaler, Ivanti and Windows built-in VPN.
 
-| Product                          | Data Sources                                               |
-|----------------------------------|------------------------------------------------------------|
-| Cisco AnyConnect / Secure Client | preferences.xml, profile XMLs                              |
-| SonicWall NetExtender            | connection.json                                            |
-| WatchGuard Mobile VPN            | wgsslvpnc.log                                              |
-| OpenVPN / OpenVPN Connect        | .ovpn profiles, auth-user-pass files                       |
-| Sophos SSL VPN                   | scgui.log, openvpn.log, scvpn.log, .ovpn                   |
-| FortiClient SSL-VPN              | fortitray.exe_sslvpnlib logs                               |
-| F5 BIG-IP                        | client.f5c, config.f5c                                     |
-| Palo Alto GlobalProtect          | PanGPA.log, PanGPS.log                                     |
-| Windows RAS/VPN                  | rasphone.pbk                                               |
-| Pulse Secure / Ivanti            | logs, .pulsepreconfig files (only available as ps1 version)|
-| Zscaler                          | JSON/XML configs, logs (only available as ps1 version)     |
-| Windows Built-in VPN             | Get-VpnConnection cmdlet (only available as ps1 version)   |
+| Product                          | Data Sources                                                 |
+|----------------------------------|--------------------------------------------------------------|
+| Cisco AnyConnect / Secure Client | preferences.xml, profile XMLs                                |
+| SonicWall NetExtender            | connection.json                                              |
+| WatchGuard Mobile VPN            | wgsslvpnc.log                                                |
+| OpenVPN / OpenVPN Connect        | .ovpn profiles                                               |
+| Sophos SSL VPN                   | scgui.log, openvpn.log, scvpn.log                            |
+| FortiClient SSL-VPN              | fortivpn.exe_sslvpnlib*.log, sslvpndaemon*.log, FortiVPN*.log|
+| F5 BIG-IP                        | client.f5c, config.f5c                                       |
+| Palo Alto GlobalProtect          | PanGPA.log, PanGPS.log                                       |
+| Windows RAS/VPN                  | rasphone.pbk                                                 |
+| Pulse Secure / Ivanti            | .pulsepreconfig files (only available as ps1 version)        |
+| Zscaler                          | Client Connector logs, registry/configuration state (only available as ps1 version) |
+| Windows Built-in VPN             | Get-VpnConnection cmdlet (only available as ps1 version)     |
 
 What it extracts: Hostnames, server addresses, usernames, groups, gateways, and connection strings. Some products store credentials in config or log files (WatchGuard logs, rasphone.pbk, OpenVPN auth-user-pass references), so passwords may be included. The PS1 version also follows OpenVPN auth-user-pass file references and reads usernames from the referenced credential files.
 
