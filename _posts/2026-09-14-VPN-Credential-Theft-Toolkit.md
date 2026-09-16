@@ -27,7 +27,7 @@ The initial access method and the use of SSL.com code-signing certificates regis
 
 #### Origin
 
-The archive (`systemchk.zip`) was obtained from an attacker-operated Dropbox share link (file ID 982pwmfxt04hkfk8yy6i2), downloaded on 04.09.2026. The link points to a single file. The initial access vector is known from case context: The attacker uses E-Mail bombing followed by a phone call or Microsoft Teams message impersonating IT support. The victim is convinced to open Quick Assist (`quickassist.exe`), which gives the attacker remote control of the endpoint. Through this session the attacker delivers and unpacks the toolkit.
+The archive (`systemchk.zip`) was obtained from an attacker-operated Dropbox share link, downloaded on 04.09.2026. The link points to a single file. The initial access vector is known from case context: The attacker uses E-Mail bombing followed by a phone call or Microsoft Teams message impersonating IT support. The victim is convinced to open Quick Assist (`quickassist.exe`), which gives the attacker remote control of the endpoint. Through this session the attacker delivers and unpacks the toolkit.
 
 #### Decryption
 
@@ -51,28 +51,28 @@ bkcrack recovered three internal encryption keys (`d2aa4c9c 31872287 dbec421b`).
 
 `bkcrack -k d2aa4c9c 31872287 dbec421b -r 12 ?p`
 
-The password is `2026`. Useful as an indicator when encountering other archives from the same or similar campaigns. The choice of ZipCrypto over AES is an operational security mistake by the attacker. It gave us full access to their tooling and TTPs - the top of the Pyramid of Pain.
+The password is `2026`. Useful as an indicator when encountering other archives from the same or similar campaigns. The choice of ZipCrypto over AES is an operational security mistake by the attacker. It gave us full access to tooling and insights about their TTPs - the top of the Pyramid of Pain.
 
 ### Toolkit Overview
 
 The archive contains 14 files with three subdirectories. Each serves a role in a six-phase operation that moves from distraction through credential theft to persistent tunneling and exfiltration.
 
-| File | SHA-256 | Role |
-|---|---|---|
-| SecUp.bat | 6352b042f41b6a844108ffd0dca279eaeff6dffe1928d4a3380005a632d152c9 | Fake update screen (distraction) |
-| ValidateUPD.exe | 88fce5bc260870ef6296c4c5967449d0dc38e83b3fcfea5a971446e8dfd1f5ff | GUI credential harvester (German) |
-| UpdateReadiness.bat | 43080aba3f771b71b0c57ad6103eb2a882a6baf7e808bb938dee5a3d8a4e414e | VPN config harvester (basic) |
-| UpdateReadiness.ps1 | 135cfc43fe6428bad794462f2d34b43984700787477fc6ee79c359d54f616ee2 | VPN config harvester (extended) |
-| WinFix9802/KB25288965.bat | 241d1719367a3100c37564a8ad386c385aa66c1a4ec4597db2826fb8fb2200b5 | Xray tunnel installer (sideloading) |
-| WinFix9802/KB25288965.ps1 | 7df0d6a35b291b37f52c067bea6818b7b23199bef78899634cd7a349f767c514 | Xray tunnel installer (sideloading) |
-| UpdPkg4681/install_KB64350357.bat | b4aa16e4d82cf18ec25464514d7f5c3e1f2096a799cdbaf958a487811cc7eca3 | Xray tunnel installer (download) |
-| UpdPkg4681/install_KB64350357.ps1 | 554f9808620c000c0459f23207dfc3a83dfda6c0720d88eb7e1d07dbd90df571 | Xray tunnel installer (download) |
-| NetFx9547/version.dll | 80bad186c66038aa972f1f31df23b1461dada71a8ad32c7d3aa785c4624f3544 | Xray client as Go shared library |
-| CheckKB.bat | e69a99d4a9254d0d8e863e1b7fbedaefc147e75da3cbfc06e4c49cffcb2b4bd9 | Exfiltration |
-| CheckKB.ps1 | 1b998dbf377874777608f6fad726a461e051352f1a7f94b426b3a017484f23dd | Exfiltration |
-| ADExplorer.exe | c5c5363d675d1bd6797081b8b7afd7fb209960a45fe18202d64d36b72a013866 | Sysinternals AD Explorer |
-| Eula.txt | 8329bcbadc7f81539a4969ca13f0be5b8eb7652b912324a1926fc9bfb6ec005a | Sysinternals EULA |
-| SpChost.bat | 7a75d7b0c49322bf1aa9ef3824c1e4ed63d589819bd7cb3cb02404331f37c1d5 | not part of active chain |
+| File                              | SHA-256                                                          | Role                               |
+|-----------------------------------|------------------------------------------------------------------|------------------------------------|
+| SecUp.bat                         | 6352b042f41b6a844108ffd0dca279eaeff6dffe1928d4a3380005a632d152c9 | Fake update screen (distraction)   |
+| ValidateUPD.exe                   | 88fce5bc260870ef6296c4c5967449d0dc38e83b3fcfea5a971446e8dfd1f5ff | GUI credential harvester (German)  |
+| UpdateReadiness.bat               | 43080aba3f771b71b0c57ad6103eb2a882a6baf7e808bb938dee5a3d8a4e414e | VPN config harvester (basic)       |
+| UpdateReadiness.ps1               | 135cfc43fe6428bad794462f2d34b43984700787477fc6ee79c359d54f616ee2 | VPN config harvester (extended)    |
+| WinFix9802/KB25288965.bat         | 241d1719367a3100c37564a8ad386c385aa66c1a4ec4597db2826fb8fb2200b5 | Xray tunnel installer (sideloading)|
+| WinFix9802/KB25288965.ps1         | 7df0d6a35b291b37f52c067bea6818b7b23199bef78899634cd7a349f767c514 | Xray tunnel installer (sideloading)|
+| UpdPkg4681/install_KB64350357.bat | b4aa16e4d82cf18ec25464514d7f5c3e1f2096a799cdbaf958a487811cc7eca3 | Xray tunnel installer (download)   |
+| UpdPkg4681/install_KB64350357.ps1 | 554f9808620c000c0459f23207dfc3a83dfda6c0720d88eb7e1d07dbd90df571 | Xray tunnel installer (download)   |
+| NetFx9547/version.dll             | 80bad186c66038aa972f1f31df23b1461dada71a8ad32c7d3aa785c4624f3544 | Xray client as Go shared library   |
+| CheckKB.bat                       | e69a99d4a9254d0d8e863e1b7fbedaefc147e75da3cbfc06e4c49cffcb2b4bd9 | Exfiltration                       |
+| CheckKB.ps1                       | 1b998dbf377874777608f6fad726a461e051352f1a7f94b426b3a017484f23dd | Exfiltration                       |
+| ADExplorer.exe                    | c5c5363d675d1bd6797081b8b7afd7fb209960a45fe18202d64d36b72a013866 | Sysinternals AD Explorer           |
+| Eula.txt                          | 8329bcbadc7f81539a4969ca13f0be5b8eb7652b912324a1926fc9bfb6ec005a | Sysinternals EULA                  |
+| SpChost.bat                       | 7a75d7b0c49322bf1aa9ef3824c1e4ed63d589819bd7cb3cb02404331f37c1d5 | not part of active chain           |
 
 File timestamps range from 17.08.2026 to 02.09.2026. The naming convention mimics Windows updates: Fake KB numbers, process names resembling system services and directory names that look like framework components. `SpChost.bat` references a directory (WinCore1615) and binary (`scvhost.exe`) that don't exist in the archive and are not mentioned by other scripts - likely a leftover from an earlier version of the toolkit.
 
@@ -80,7 +80,7 @@ File timestamps range from 17.08.2026 to 02.09.2026. The naming convention mimic
 
 #### Phase 1 - Initial Access
 
-The victim is flooded with spam E-Mails. Shortly after, the attacker contacts the victim by phone or Microsoft Teams, impersonating IT support. The victim is guided to open Quick Assist (`quickassist.exe`), giving the attacker remote control. Through this session the attacker downloads the archive, enters the password, and unpacks the toolkit for further actions on objective.
+The victim is flooded with spam E-Mails. Shortly after, the attacker contacts the victim by phone or Microsoft Teams, impersonating IT support. The victim is guided to open Quick Assist (quickassist.exe), giving the attacker remote control. Through this session the attacker downloads the archive, enters the password, and unpacks the toolkit for further actions on objective.
 
 #### Phase 2 - Distraction
 
@@ -115,20 +115,20 @@ An Xray/V2Ray reverse tunnel with REALITY TLS is installed. Two variants cover d
 
 The harvester scans the system for VPN configuration files and cached credentials. The batch version covers nine products - the PowerShell version adds Zscaler, Ivanti and Windows built-in VPN.
 
-| Product | Data Sources |
-|---|---|
-| Cisco AnyConnect / Secure Client | preferences.xml, profile XMLs |
-| SonicWall NetExtender | connection.json |
-| WatchGuard Mobile VPN | wgsslvpnc.log |
-| OpenVPN / OpenVPN Connect | .ovpn profiles, auth-user-pass files |
-| Sophos SSL VPN | scgui.log, openvpn.log, scvpn.log, .ovpn |
-| FortiClient SSL-VPN | fortitray.exe_sslvpnlib logs |
-| F5 BIG-IP | client.f5c, config.f5c |
-| Palo Alto GlobalProtect | PanGPA.log, PanGPS.log |
-| Windows RAS/VPN | rasphone.pbk |
-| Pulse Secure / Ivanti | logs, .pulsepreconfig files (only available as ps1 version) |
-| Zscaler | JSON/XML configs, logs (only available as ps1 version) |
-| Windows Built-in VPN | Get-VpnConnection cmdlet (only available as ps1 version) |
+| Product                          | Data Sources                                               |
+|----------------------------------|------------------------------------------------------------|
+| Cisco AnyConnect / Secure Client | preferences.xml, profile XMLs                              |
+| SonicWall NetExtender            | connection.json                                            |
+| WatchGuard Mobile VPN            | wgsslvpnc.log                                              |
+| OpenVPN / OpenVPN Connect        | .ovpn profiles, auth-user-pass files                       |
+| Sophos SSL VPN                   | scgui.log, openvpn.log, scvpn.log, .ovpn                   |
+| FortiClient SSL-VPN              | fortitray.exe_sslvpnlib logs                               |
+| F5 BIG-IP                        | client.f5c, config.f5c                                     |
+| Palo Alto GlobalProtect          | PanGPA.log, PanGPS.log                                     |
+| Windows RAS/VPN                  | rasphone.pbk                                               |
+| Pulse Secure / Ivanti            | logs, .pulsepreconfig files (only available as ps1 version)|
+| Zscaler                          | JSON/XML configs, logs (only available as ps1 version)     |
+| Windows Built-in VPN             | Get-VpnConnection cmdlet (only available as ps1 version)   |
 
 What it extracts: Hostnames, server addresses, usernames, groups, gateways, and connection strings. Some products store credentials in config or log files (WatchGuard logs, rasphone.pbk, OpenVPN auth-user-pass references), so passwords may be included. The PS1 version also follows OpenVPN auth-user-pass file references and reads usernames from the referenced credential files.
 
@@ -158,7 +158,7 @@ Each victim gets a unique bridge domain passed as a script parameter (e.g. h5.tu
 
 Variant A - DLL Sideloading (offline):
 
-The 31.5 MB version.dll in the archive is not a real Windows version DLL (~30 KB). It is the Xray client compiled as a Go shared library. Go module strings in the binary confirm `xray-core v1.260327.0` with `REALITY v0.0.0-20260322`, built from the GitHub repository `VanyaKrotov/xray_cshare`, which has since been deleted. This wrapper was maybe built to make xray-core loadable as a DLL for sideloading.
+The 31.5 MB version.dll in the archive is not a real Windows version DLL (~30 KB). It is the Xray client compiled as a Go shared library. Go module strings in the binary confirm `xray-core v1.260327.0` with REALITY v0.0.0-20260322, built from the GitHub repository VanyaKrotov/xray_cshare, which has since been deleted. This wrapper was maybe built to make xray-core loadable as a DLL for sideloading.
 
 Persistence: HKCU Run key `"RemoteAppConnectionBroker"` pointing to the copied `wkspbroker.exe`. The directory is hidden (attrib +h) and the batch file deletes itself after execution.
 
@@ -209,55 +209,55 @@ Both binaries (`ValidateUPD.exe` and `version.dll`) are signed with the same cer
 
 ### Malware / Tools
 
-| Tool | Filename | HashType | Hash |
-|---|---|---|---|
-| credential harvester | ValidateUPD.exe | SHA-256 | 88fce5bc260870ef6296c4c5967449d0dc38e83b3fcfea5a971446e8dfd1f5ff |
-| Xray client | version.dll / radcui.dll | SHA-256 | 80bad186c66038aa972f1f31df23b1461dada71a8ad32c7d3aa785c4624f3544 |
+| Tool                  | Filename                  | HashType | Hash                                                             |
+|-----------------------|---------------------------|----------|------------------------------------------------------------------|
+| credential harvester  | ValidateUPD.exe           | SHA-256  | 88fce5bc260870ef6296c4c5967449d0dc38e83b3fcfea5a971446e8dfd1f5ff |
+| Xray client           | version.dll / radcui.dll  | SHA-256  | 80bad186c66038aa972f1f31df23b1461dada71a8ad32c7d3aa785c4624f3544 |
 
 ### Network
 
-| Technique | ArtifactType | Value |
-|---|---|---|
-| C2 | IP | 74.0.42.157 (Xray VPS, VLESS port 443) |
-| Exfiltration | Domain | sdj4mqcf-8443.use.devtunnels[.]ms |
-| Staging | Domain | file-node-neu.ambitioussand-8c67ee96.northeurope.azurecontainerapps[.]io |
-| Staging | Domain | file-node-us.azurewebsites[.]net |
-| Delivery | URL | hxxps://dropbox[.]com/scl/fi/982pwmfxt04hkfk8yy6i2/systemchk.zip |
-| Delivery | URL | hxxps://dropbox[.]com/scl/fi/2x5vw0md8h2mlj116k5w3/Xray-windows-64.zip |
-| Delivery | URL | hxxps://dropbox[.]com/scl/fi/y0unoesteryu5ah2j7cpr/z.zip |
+| Technique     | ArtifactType | Value                                                                     |
+|---------------|--------------|---------------------------------------------------------------------------|
+| C2            | IP           | 74.0.42.157 (Xray VPS, VLESS port 443)                                    |
+| Exfiltration  | Domain       | sdj4mqcf-8443.use.devtunnels[.]ms                                         |
+| Staging       | Domain       | file-node-neu.ambitioussand-8c67ee96.northeurope.azurecontainerapps[.]io  |
+| Staging       | Domain       | file-node-us.azurewebsites[.]net                                          |
+| Delivery      | URL          | hxxps://dropbox[.]com/scl/fi/982pwmfxt04hkfk8yy6i2/systemchk.zip          |
+| Delivery      | URL          | hxxps://dropbox[.]com/scl/fi/2x5vw0md8h2mlj116k5w3/Xray-windows-64.zip    |
+| Delivery      | URL          | hxxps://dropbox[.]com/scl/fi/y0unoesteryu5ah2j7cpr/z.zip                  |
 
 ### Host
 
-| Technique | ArtifactType | Value |
-|---|---|---|
-| Persistence | File (path) | %LocalAppData%\RemoteAppRuntime\Broker\ (wkspbroker.exe, radcui.dll, config.json) |
-| Persistence | File (path) | %LocalAppData%\ConnectivityService\Agent\ (ConnectivityHost.exe, config.json, svchost.dat) |
-| Collection | File (path) | %APPDATA%\PolicyMgr\ (policyMgr.log, policyMgr.cfg, policyMgr.bkp) |
-| Persistence | Registry key | HKCU\Software\Microsoft\Windows\CurrentVersion\Run - RemoteAppConnectionBroker |
-| Persistence | Registry key | HKCU\Software\Microsoft\Windows\CurrentVersion\Run - ConnectivityServiceAgent |
-| Defense Evasion | File | scvhost.exe (typosquat of svchost.exe - legacy) |
-| Defense Evasion | File | ConnectivityHost.exe (renamed xray.exe) |
+| Technique       | ArtifactType | Value                                                                                     |
+|-----------------|--------------|-------------------------------------------------------------------------------------------|
+| Persistence     | File (path)  | %LocalAppData%\RemoteAppRuntime\Broker\ (wkspbroker.exe, radcui.dll, config.json)         |
+| Persistence     | File (path)  | %LocalAppData%\ConnectivityService\Agent\ (ConnectivityHost.exe, config.json, svchost.dat)|
+| Collection      | File (path)  | %APPDATA%\PolicyMgr\ (policyMgr.log, policyMgr.cfg, policyMgr.bkp)                        |
+| Persistence     | Registry key | HKCU\Software\Microsoft\Windows\CurrentVersion\Run - RemoteAppConnectionBroker            |
+| Persistence     | Registry key | HKCU\Software\Microsoft\Windows\CurrentVersion\Run - ConnectivityServiceAgent             |
+| Defense Evasion | File         | scvhost.exe (typosquat of svchost.exe - legacy)                                           |
+| Defense Evasion | File         | ConnectivityHost.exe (renamed xray.exe)                                                   |
 
 
 ## MITRE ATT&CK Mapping
 
-| Tactic (MITRE) | Technique | ID | Campaign Mapping | Behavioral Indicator |
-|---|---|---|---|---|
-| Initial Access | Phishing: Spearphishing via Service | T1566.003 | Fake IT support via Teams |
-| Impact | Email Bombing | T1667 | Email bombing as preparation for initial access |
-| Persistence | Boot or Logon Autostart Execution: Run Keys | T1547.001 | HKCU Run keys (two variants) | HKCU Run key pointing to a hidden directory under %LocalAppData% containing non-Microsoft binaries
-| Defense Evasion | Masquerading: Match Legitimate Name | T1036.005 | Fake KB numbers, scvhost, ConnectivityHost | Process execution from %LocalAppData%\RemoteAppRuntime\ or %LocalAppData%\ConnectivityService\
-| Defense Evasion | Hijack Execution Flow: DLL Side-Loading | T1574.002 | wkspbroker.exe loading radcui.dll | wkspbroker.exe executing from outside C:\Windows\System32\
-| Defense Evasion | Subvert Trust Controls: Code Signing | T1553.002 | SSL.com certificate on both binaries |
-| Credential Access | Credentials from Password Stores | T1555 | VPN configs, logs, auth-user-pass files | cmd.exe or powershell.exe reading VPN configuration files
-| Credential Access | Input Capture: GUI Input Capture | T1056.002 | ValidateUPD.exe fake login dialog |
-| Discovery | Account Discovery | T1087 | AD Explorer snapshots |
-| Command and Control | Remote Access Tools: Remote Desktop Software | T1219.002 | Quick Assist (quickassist.exe) |
-| Command and Control | Web Service | T1102 | Dev Tunnels as C2 |
-| Command and Control | Ingress Tool Transfer | T1105 | certutil / curl downloading Xray (Variant B fallback) | certutil.exe invoked with -urlcache -split -f downloading ZIP files
-| Command and Control | Protocol Tunneling | T1572 | Xray VLESS Reverse Bridge | TLS connection with SNI dl.google.com to a destination IP outside Google's published ranges
-| Command and Control | Encrypted Channel: Asymmetric Crypto | T1573.002 | REALITY TLS (SNI dl.google.com) |
-| Exfiltration | Exfiltration Over C2 Channel | T1041 | CheckKB over Dev Tunnels |
+| Tactic (MITRE)      | Technique                                    | ID        | Campaign Mapping                                      | Behavioral Indicator                                                                                |
+|---------------------|----------------------------------------------|-----------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Initial Access      | Phishing: Spearphishing via Service          | T1566.003 | Fake IT support via Teams                             |                                                                                                     |
+| Impact              | Email Bombing                                | T1667     | Email bombing as preparation for initial access       |                                                                                                     |
+| Persistence         | Boot or Logon Autostart Execution: Run Keys  | T1547.001 | HKCU Run keys (two variants)                          | HKCU Run key pointing to a hidden directory under %LocalAppData% containing non-Microsoft binaries  |
+| Defense Evasion     | Masquerading: Match Legitimate Name          | T1036.005 | Fake KB numbers, scvhost, ConnectivityHost            | Process execution from %LocalAppData%\RemoteAppRuntime\ or %LocalAppData%\ConnectivityService\      |
+| Defense Evasion     | Hijack Execution Flow: DLL Side-Loading      | T1574.002 | wkspbroker.exe loading radcui.dll                     | wkspbroker.exe executing from outside C:\Windows\System32\                                          |
+| Defense Evasion     | Subvert Trust Controls: Code Signing         | T1553.002 | SSL.com certificate on both binaries                  |                                                                                                     |
+| Credential Access   | Credentials from Password Stores             | T1555     | VPN configs, logs, auth-user-pass files               | cmd.exe or powershell.exe reading VPN configuration files                                           |
+| Credential Access   | Input Capture: GUI Input Capture             | T1056.002 | ValidateUPD.exe fake login dialog                     |                                                                                                     |
+| Discovery           | Account Discovery                            | T1087     | AD Explorer snapshots                                 |                                                                                                     |
+| Command and Control | Remote Access Tools: Remote Desktop Software | T1219.002 | Quick Assist (quickassist.exe)                        |                                                                                                     |
+| Command and Control | Web Service                                  | T1102     | Dev Tunnels as C2                                     |                                                                                                     |
+| Command and Control | Ingress Tool Transfer                        | T1105     | certutil / curl downloading Xray (Variant B fallback) | certutil.exe invoked with -urlcache -split -f downloading ZIP files                                 |
+| Command and Control | Protocol Tunneling                           | T1572     | Xray VLESS Reverse Bridge                             | TLS connection with SNI dl.google.com to a destination IP outside Google's published ranges         |
+| Command and Control | Encrypted Channel: Asymmetric Crypto         | T1573.002 | REALITY TLS (SNI dl.google.com)                       |                                                                                                     |
+| Exfiltration        | Exfiltration Over C2 Channel                 | T1041     | CheckKB over Dev Tunnels                              |                                                                                                     |
 
 
 ## Recommendation / Learning
@@ -269,5 +269,10 @@ Both binaries (`ValidateUPD.exe` and `version.dll`) are signed with the same cer
 - The code-signing certificate (`66096FE6AAB808036B840F230F5606A5`, issued to YOUR CHANCE j.d.o.o via SSL.com) is assessed with Moderate confidence to be the strongest cross-campaign correlation indicator available.
 - Both standalone executables in the archive are validly signed and undetected by any antivirus engine. Signature-based detection alone does not cover this toolkit.
 
+## Conclusion
 
-This report was created with AI assistance.
+Overall, the findings show a specialized toolkit that combines credential theft, persistent tunneling, and reconnaissance while blending into normal enterprise activity. The focus on VPN credentials and AD reconnaissance suggests that the compromised endpoint is primarily used to enable initial access into the broader corporate environment. This provides a foundation for follow-on activity, whether conducted by the same operator or handed off to another actor. The case highlights the importance of detecting suspicious behavior across otherwise legitimate tools, signed binaries, and trusted services rather than relying on individual artifacts alone.
+
+
+
+This report was produced with AI assistance.
