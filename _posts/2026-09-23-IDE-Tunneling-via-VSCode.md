@@ -57,7 +57,7 @@ When `tunnel.js` runs, it runs through wscript and then cmd, the process chain t
 
 This section walks through how a Visual Studio Code tunnel is set up and used, from the first command to a live session and on to persistence (Figure 1), drawing on public reporting and what the lab reproduced. Almost every step runs on trusted, Microsoft-owned parts: A signed binary, Microsoft's own relay and a normal GitHub sign-in. On its own, no single step looks out of place.
 
-![Tunnel establishment and session flow](screenshots_IDE-Tunneling/01_tunnel-establishment.png)
+![Tunnel establishment and session flow](/assets/images/IDE-Tunneling/01_tunnel-establishment.png)
 *Figure 1- Tunnel establishment and session flow. The phases below walk through each step. Every arrow is an outbound connection to a Microsoft or GitHub service, or a local action on the machine, and there is no direct operator-to-machine link at any point*
 
 #### Phase 1 - Getting the tool onto the machine
@@ -74,7 +74,7 @@ Once the account has authorized it, the tool registers a tunnel and connects out
 
 In the lab an intercepting proxy showed the exchange step by step. The tool first reaches a global relay host, `global.rel.tunnels.api.visualstudio.com`, then a regional pair, `euw.rel` and `euw-data.rel`. A short set of web requests to those hosts creates the tunnel and opens a port and the session itself then runs over a WebSocket to the `euw-data.rel` host (Figure 2). The data inside that WebSocket is encrypted a second time: A full SSH connection, with a `Microsoft.DevTunnels.Ssh` server on one side and the tool's `russh` client on the other. So the channel is SSH inside a WebSocket inside TLS. A proxy that holds its own certificate can open the outer TLS but not the inner SSH, so the commands and files inside the session stay unreadable even after the outer TLS is opened.
 
-![In tunnel traffic](screenshots_IDE-Tunneling/02_relay-network-traffic.png)
+![In tunnel traffic](/assets/images/IDE-Tunneling/02_relay-network-traffic.png)
 *Figure 2 - The relay control plane and the SSH-over-WSS data connection. The REST calls that create the tunnel and register a TunnelRelay endpoint and the WebSocket whose first frames are an SSH handshake. Not EDR telemetry.*
 
 #### Phase 4 - The operator connects
@@ -105,14 +105,14 @@ So the rename does not hide the binary from telemetry on either platform. What i
 
 The signature does not help here. After the rename the binary is still validly signed by Microsoft, with the same signing data as before, and it sits in the same signing class as MicrosoftEdgeUpdate.exe, msedgewebview2.exe, and node.exe. A control that keys on the signer has nothing to work with. Every publicly reported case of the technique keeps the binary inside the `code` family of names.
 
-![Defender timeline flags the renamed binary](screenshots_IDE-Tunneling/03_defender_timeline-renamebinary.png)
+![Defender timeline flags the renamed binary](/assets/images/IDE-Tunneling/03_defender_timeline-renamebinary.png)
  *Figure 3 - Defender flags the renamed binary. In the attack chain's execution stage: The MismatchingOriginalNameWindowsBinary detection on updater.exe with its powershell → wscript → cmd → updater ancestry, plus the device-code exfil and the tunnel servers named pipe. Defender advanced-hunting timeline, UTC.*
 
 #### Execution context and ancestry
 
 This is the signal the whole report leans on. On Defender the full chain of parent processes was recorded end to end: `explorer` → `powershell` → `wscript` → `cmd` → `updater` → `node`. Falcon carries four generations directly, the process itself plus three ancestors, in a dedicated event called `ProcessAncestryInformation`, each with its own SHA256 (Figure 4).  The trade-off is that Falcon keeps the depth and the command lines on separate events. The command line lives on the process-creation event and has to be joined back in. So Falcon reaches deeper without a join, but needs a join to read what each ancestor actually ran.
 
-![Defender timeline flags the renamed binary](screenshots_IDE-Tunneling/04_falcon_processchain.png)
+![Defender timeline flags the renamed binary](/assets/images/IDE-Tunneling/04_falcon_processchain.png)
 *Figure 4 - Falcon ProcessAncestryInformation for the renamed updater.exe. Four generations in one record, with OriginalFilename recovering code.exe. This is a direct establishment run, not the scripted chain, which Falcon cannot record. Falcon Advanced Event Search, UTC+2 (console local).*
 
 There is one case where the chain breaks. Under Falcon's active-prevention policy the Startup script's `wscript` launch is blocked, and a process that Falcon blocks doesn't produce a process-creation record. With no record there is nothing to join through, so the chain has a hole where the blocked step should be. Across the relevant window, 193 process-creation records held no wscript, no updater, and no node. Over the same window the detection stream separately showed that wscript had run for 25 milliseconds. Those same 193 records showed the sensor reporting normally, and the powershell that launched the blocked step was present. When prevention blocks a step, that step moves out of the process data and into the detection data, and the two do not join on process ID. With that one caveat, the signal to build a hunt on is the execution context and the session activity, not the binary. That is assessed with High confidence.
@@ -129,7 +129,7 @@ The tunnel server is `node.exe` running a script called `server-main.js` with a 
 
 While setting up its server, the command-line tool writes a large, named set of files under a path shaped like `…\servers\Stable-<commit-hash>\`, including `code-server.cmd`, `browser.cmd`, `code.cmd`, and the server's own `node.exe`. That path is built the same way whatever the binary is called, so it is a host signature a rename does not touch, and the commit hash in it ties the files to a specific VS Code build. Both platforms captured the unpacking, so the signature is there to hunt on either one. The difference is on two writes that matter more. Falcon captured the Startup `tunnel.js` drop (Figure 5) and the file the operator edited inside the session. Defender captured neither. Falcon also recorded something Defender did not: VSCode's own local-history copy of the edited file, under `%USERPROFILE%\.vscode-server\…\History\`. We did not delete the original, so we make no claim about whether the copy survives a deletion. The `--cli-data-dir` option moves the server files, but the tool still leaves a lock file at `%USERPROFILE%\.vscode-server\cli\`, so a path hunt there still catches it even when the rest of the data has been moved.
 
-![Falcon's write footprint for the attack chain](screenshots_IDE-Tunneling/05_falcon_alert-console.png)
+![Falcon's write footprint for the attack chain](/assets/images/IDE-Tunneling/05_falcon_alert-console.png)
 *Figure 5 - Falcon's write footprint for the attack chain. The updater.exe write to C:\ProgramData with its SHA256, and the Startup tunnel.js drop that Defender did not capture. Falcon Advanced Event Search timeline, UTC+2 (console-local).*
 
 #### Persistence
@@ -138,18 +138,18 @@ The native persistence path writes the HKCU Run key described in Phase 7, not a 
 
 On Defender the native Run key is the louder option. It raised two "Anomaly detected in ASEP registry" alerts, mapped to T1547.001 and T1112 (Figure 6). The improvised Startup script was the quieter one, because Defender recorded no file-write event for `tunnel.js`. We confirmed that with an unfiltered pull of the delivery window, where the tool's other writes are present and `tunnel.js` simply is not.
 
-![Defender surfaces the native Run key as a persistence alert](screenshots_IDE-Tunneling/06_defender_processchain.png)
+![Defender surfaces the native Run key as a persistence alert](/assets/images/IDE-Tunneling/06_defender_processchain.png)
 *Figure 6 - Defender surfaces the native Run key as a persistence alert. The alert's process tree, showing the HKCU Run value Visual Studio Code Tunnel and the tunnel service install that wrote it. Defender alert view, UTC.*
 
 On Falcon the order reverses. The Startup script's execution is caught and blocked: The wscript launch is killed in about 25 milliseconds under a rule called `ScriptStartupFolder` (Figure 7). But the native Run key is neither blocked nor alerted. The write produced a named, severity-30 alert-class event (low on Falcon's 0-to-100 scale), `SuspiciousRegAsepUpdate` ("Module Written as Asep"), directly queryable and never surfaced as an alert in the console (Figure 8). The write is also carried as an ordinary telemetry record, AsepValueUpdate, which holds the full value data (Figure 9). The two are the same write seen twice: one as recognition that never reaches the console, one as plain telemetry.
 
-![Falcon blocks the Startup-folder persistence execution](screenshots_IDE-Tunneling/07_falcon_processchain-console.png)
+![Falcon blocks the Startup-folder persistence execution](/assets/images/IDE-Tunneling/07_falcon_processchain-console.png)
 *Figure 7 - Falcon blocks the Startup-folder persistence execution. The wscript.exe launch of `…\Startup\tunnel.js killed under the IOA ScriptStartupFolder (T1547.001). Falcon detections console, UTC+2 (console-local).*
 
-![The recognition that does not reach the analyst](screenshots_IDE-Tunneling/08_falcon_asep.png)
+![The recognition that does not reach the analyst](/assets/images/IDE-Tunneling/08_falcon_asep.png)
 *Figure 8 - The recognition that does not reach the analyst. Falcon's SuspiciousRegAsepUpdate on the Run-key write: Queryable in telemetry, didnt surfaced as a console detection. Falcon Advanced Event Search, UTC+2 (console-local).*
 
-![Defender attributes the in-tunnel commands to the tunnel server](screenshots_IDE-Tunneling/09_falcon_asep_write.png)
+![Defender attributes the in-tunnel commands to the tunnel server](/assets/images/IDE-Tunneling/09_falcon_asep_write.png)
 *Figure 9 - The underlying Run-key write in Falcon telemetry. AsepValueUpdate carries the full tunnel service internal-run command line and the --cli-data-dir relocation. Falcon Advanced Event Search, UTC+2 (console-local).*
 
 Two cautions apply to the registry surface on both platforms. First, the tactic tag is not a usable filter. In one 45-minute window this surface carried 74 of these events. Two were the tunnel. Of the other 72, roughly half carried the same persistence tag, which came from COM registrations and the Edge and OneDrive updaters. A hunt has to key on the value name or the key path, not the tag. Second, the autostart itself produces no such event, because starting from a Run key reads it rather than writes it.
@@ -160,10 +160,10 @@ Once the operator connects, what they do inside the tunnel is still tied back to
 
 Falcon adds one event (`CommandHistory`) that holds the whole shell buffer in a single record (Figure 10). This is a convenience rather than something only Falcon can see, since Defender captures the same commands one execution at a time. It comes with two caveats. The buffer is flushed on a timer, so it trails the session by about three and a half minutes, and the record carries no tactic or technique tag, even though a separate shell open directly on the machine's console during the run, outside the tunnel, did carry them. The process ID on the buffer record is exactly the session shell that ancestry ties back through node to updater.exe.
 
-![Defender attributes the in-tunnel commands to the tunnel server](screenshots_IDE-Tunneling/10_defender_timeline-intunnelcmd.png)
+![Defender attributes the in-tunnel commands to the tunnel server](/assets/images/IDE-Tunneling/10_defender_timeline-intunnelcmd.png)
 *Figure 10 - Defender attributes the in-tunnel commands to the tunnel server. Each in-tunnel command carries node, the tunnel server, in its ancestry, captured one execution at a time, above the session's relay connection, server unpack, and wsl.exe helper. Defender advanced hunting timeline, UTC.*
 
-![Falcon CommandHistory for the in-tunnel shell.](screenshots_IDE-Tunneling/11_falcon_cmdhistory.png)
+![Falcon CommandHistory for the in-tunnel shell.](/assets/images/IDE-Tunneling/11_falcon_cmdhistory.png)
 *Figure 11 - Falcon CommandHistory for the in-tunnel shell. One record holds the whole session buffer, and its TargetProcessId matches the session shell that ancestry ties to the tunnel server. Falcon Advanced Event Search, UTC+2 (console-local).*
 
 The blind spot is the file content. Reading a file or downloading one through the tunnel produced nothing on either platform, which is expected, because a read is not a write, a rename, or a delete. 
@@ -176,7 +176,7 @@ One platform note: Falcon logs the tunnel session as a local, interactive logon 
 
 Defender ships a built-in detection, `Suspicious Visual Studio (VS) code tunneling`, and it did fire. It fired on the legitimate developer baseline, and on a separate un-renamed run of the standalone tool used as a control, and the two merged into one alert (Figure 11). That is two problems at once for anyone who would rely on it. It fires on ordinary developer work, and the rename gets past it, because the renamed attack-chain and persistence runs produced no tunneling alert. The rename is not completely free, because it trips `MismatchingOriginalNameWindowsBinary` on Defender, but the tunneling alert itself is gone. Defender also files its alert under Protocol Tunneling (T1572) rather than IDE Tunneling.
 
-![The built-in alert fires on legitimate developer use](screenshots_IDE-Tunneling/12_defender_timeline_legituse.png)
+![The built-in alert fires on legitimate developer use](/assets/images/IDE-Tunneling/12_defender_timeline_legituse.png)
 *Figure 12 - The built-in alert fires on legitimate developer use. On the developer baseline, Defender's built-in Suspicious Visual Studio (VS) code tunneling fires on the un-renamed code-tunnel.exe. The same timeline also carries the discrete NamedPipeEvent. Defender advanced-hunting timeline, UTC.*
 
 On Falcon, under the "Default" prevention policy, no detection surfaced on any tunnel, renamed or not, establishment or persistence. The "Remote Access Tool" recognition existed only as a tag on the process record for un-renamed binaries, and the rename removed the tag. Every detection that did fire during the work fired on the delivery and persistence parts an operator can swap out, the PowerShell loader and the Startup wscript, not on the tunnel itself. The one piece of tunnel-specific recognition on Falcon, the `SuspiciousRegAsepUpdate` on the Run key, sat in the data and never reached the console. So the Falcon result is "recognized but not shown" for persistence, and "not recognized" for the renamed binary. None of this is a verdict on either product.
@@ -278,6 +278,8 @@ The research comes down to one finding with a clear consequence. IDE tunneling d
 - **Network-layer control:** Blocking outbound access to the relay domain (`*.tunnels.api.visualstudio.com`) for systems that have no need for it is the one network control that is effective, because both the victim and the operator only ever connect outbound to Microsoft and never to each other. For teams that inspect network traffic, the tunnel can be recognized but not read: its session runs SSH inside the relay's WebSocket, so interception reveals the destination and SSH handshake, but not the commands or files inside. Detect on the destination, and treat TLS inspection as a recognition aid, not a way to see content
 - **Host-layer controls**: Different methods to mitigate or detect the use of VS Code tunnels are [publicly documented](https://ipfyx.fr/post/visual-studio-code-tunnel/). For example, application-control mechanisms such as AppLocker or WDAC can deny the standalone command-line tool outside approved directories.
 - **Do not rely on built-in alerting for this technique:** Under the postures tested, Defender's shipped tunneling alert fires on legitimate developer use and is evaded by a one-line rename, and Falcon surfaced no detection on the tunnel at all under its Default prevention policy. Read strictly as observations under those configurations rather than verdicts on either product, and assessed with High confidence, they still mean one thing for a defender: neither alert is a substitute for the hunt.
+
+This report was produced with AI assistance.
 
 
 ## Appendix A - Defender for Endpoint hunting queries (KQL)
