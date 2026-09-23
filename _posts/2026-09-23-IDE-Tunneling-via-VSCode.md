@@ -2,7 +2,7 @@
 title: 'Beyond the Binary: Hunting VS Code Tunnel Abuse'
 header: 'Beyond the Binary: Hunting VS Code Tunnel Abuse'
 og_description: 'Investigating VS Code tunnel abuse, from attack simulation and tunnel mechanics to EDR telemetry and detection gaps, with practical hunting approaches for Microsoft Defender and CrowdStrike Falcon.'
-og_image: "/assets/images/IDE-Tunneling-VSCode/00_ide-tunneling-cover_slim.png"
+og_image: "/assets/images/IDE-Tunneling/00_ide-tunneling-cover_slim.png"
 tags: ['ThreatIntel']
 author: Nico Thelen
 ---
@@ -28,7 +28,7 @@ As of the time of this report, no data on current campaigns is available. Past i
 
 #### Threat Actor 
 
-No current campaign observed. IDE tunneling has been used in real intrusions by three different kinds of operator. China-nexus espionage groups have used it, including [Stately Taurus](https://unit42.paloaltonetworks.com/stately-taurus-abuses-vscode-southeast-asian-espionage) against government targets in Asia, [MirrorFace](https://www.welivesecurity.com/en/eset-research/operation-akairyu-mirrorface-invites-europe-expo-2025-revives-anel-backdoor/) against a diplomatic target in Central Europe and the Operation [Digital Eye](https://www.sentinelone.com/labs/operation-digital-eye-chinese-apt-compromises-critical-digital-infrastructure-via-visual-studio-code-tunnels/) activity against Southern European IT providers. DPRK-aligned operators have used it in a [campaign](https://www.darktrace.com/blog/darktrace-identifies-campaign-targeting-south-korea-leveraging-vs-code-for-remote-access) identified by darktrace against South Korean targets. And it has appeared in financially motivated intrusions, abused through the [Velociraptor forensic tool](https://www.sophos.com/en-us/blog/velociraptor-incident-response-tool-abused-for-remote-access) as a ransomware precursor and deployed by the [Warlock](https://www.trendmicro.com/en_us/research/26/c/dissecting-a-warlock-attack.html) ransomware operators. That three unrelated operator classes reach for the same technique suggests it has become commodity tradecraft, and the most recent confirmed use dates to 2026. Warlock and Kimsuky ran it alongside other legitimate-infrastructure tunnels such as Cloudflare and Velociraptor, so it is not limited to a single channel.
+No current campaign observed. IDE tunneling has been used in real intrusions by three different kinds of operators. China-nexus espionage groups have used it, including [Stately Taurus](https://unit42.paloaltonetworks.com/stately-taurus-abuses-vscode-southeast-asian-espionage) against government targets in Asia, [MirrorFace](https://www.welivesecurity.com/en/eset-research/operation-akairyu-mirrorface-invites-europe-expo-2025-revives-anel-backdoor/) against a diplomatic target in Central Europe and the Operation [Digital Eye](https://www.sentinelone.com/labs/operation-digital-eye-chinese-apt-compromises-critical-digital-infrastructure-via-visual-studio-code-tunnels/) activity against Southern European IT providers. DPRK-aligned operators have used it in a [campaign](https://www.darktrace.com/blog/darktrace-identifies-campaign-targeting-south-korea-leveraging-vs-code-for-remote-access) identified by Darktrace against South Korean targets. And it has appeared in financially motivated intrusions, abused through the [Velociraptor forensic tool](https://www.sophos.com/en-us/blog/velociraptor-incident-response-tool-abused-for-remote-access) as a ransomware precursor and deployed by the [Warlock](https://www.trendmicro.com/en_us/research/26/c/dissecting-a-warlock-attack.html) ransomware operators. That three unrelated operator classes reach for the same technique suggests it has become commodity tradecraft, and the most recent confirmed use dates to 2026. Warlock and Kimsuky ran it alongside other legitimate-infrastructure tunnels such as Cloudflare and Velociraptor, so it is not limited to a single channel.
 
 ## Proof-of-Concept Environment
 
@@ -119,7 +119,7 @@ There is one case where the chain breaks. Under Falcon's active-prevention polic
 
 #### Relay network
 
-Both platforms show the relay by name, but they put it in different places. Defender attaches the relay's full name to the successful connection event itself, in a field called `RemoteUrl`, with the value `global.rel.tunnels.api.visualstudio.com`, and it produces no separate DNS event tied to the tunnel process. Falcon does the opposite. Its connection event carries only the IP address, but it produces a separate DNS lookup event with the name in it. On Falcon that lookup even shows the order of resolution: A global relay first, then the regional euw and euw-data hosts. The many public detections that key on the relay's DNS name map straight onto Falcon, and onto Defender only through the connection event. 
+Both platforms show the relay by name, but they put it in different places. Defender attaches the relay's full name to the successful connection event itself, in a field called `RemoteUrl`, with the value `global.rel.tunnels.api.visualstudio.com`, and it produces no separate DNS event tied to the tunnel process. Falcon does the opposite. Its connection event carries only the IP address, but it produces a separate DNS lookup event with the name in it. On Falcon that lookup even shows the order of resolution: A global relay first, then the regional `euw` and `euw-data` hosts. The many public detections that key on the relay's DNS name map straight onto Falcon, and onto Defender only through the connection event. 
 
 #### Server payload and inter-process communication
 
@@ -185,39 +185,43 @@ On Falcon, under the "Default" prevention policy, no detection surfaced on any t
 
 The binary is the weakest thing to key on. It is signed by Microsoft, it can be renamed out of the recognized name family for the cost of one mismatch record, it can be moved anywhere, and it has a legitimate developer baseline that the one built-in tunneling alert cannot tell apart from an attack. The relay is no better, because it is Microsoft's own and is shared with ordinary VS Code traffic. What does survive is context: the parent chain that shows what started the tunnel, and the ancestry that shows what runs inside it once the operator is connected. Both are recorded well enough to tell developer use from an intrusion, with two gaps to design around. One is the blocked step that leaves the process data for the detection data. The other is file-content activity inside the session, which neither platform records. Those are the signals the hypothesis and the hunt build on, and they are why detection should aim at the session rather than the binary. 
 
-## Hypothesis
+## Hunting Guidance
+
+The technical analysis above establishes which telemetry is available and where its gaps lie. The following guidance turns those findings into a practical hunt for tunnel establishment, persistence, and in-session activity.
+
+### Hypothesis
 
 We assume an attacker already has code execution on a Windows endpoint. From there they start a Visual Studio Code tunnel and sign it in to their own GitHub account, which gives them an interactive command-and-control channel. We expect the technique to stay visible in two places: The execution context that shows what launched the tunnel command, and the activity the operator runs inside the session. The hunt targets both.
 
-## Scope
+### Scope
 
 **In scope.** Post-exploitation use of IDE tunneling on managed, EDR-monitored Windows endpoints, assuming the adversary already has code execution. This covers the command-and-control and actions-on-objectives end of the kill chain: standing up the C2 channel, persisting it across reboot, and the hands-on-keyboard activity inside the live session, such as host and account discovery. The detection surface is endpoint telemetry, correlated with the identity and network artifacts the tunnel leaves.
 
 **Out of scope.** Delivery and initial access: The tunnel only runs after a loader has executed the CLI, so catching that loader measures the loader, not the technique. The Proof-of-Concept Environment section describes the delivery chain for context but does not assess its detection. Also excluded: post-tunnel lateral movement, non-Windows platforms, other IDEs and VS Code forks, and the effectiveness of the [dev-tunnel group policies](https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/policies).
 
-## Methodology
+### Methodology
 
 The hunt runs in two parts, with a baseline step in front of them. The first part finds a tunnel being established and keys on execution context rather than the binary. The second part finds what an operator does once the tunnel is live. The queries that implement it, for both Defender for Endpoint and Falcon, are in Appendix A and Appendix B with full parity. Two constraints shape every step: nothing keys on the binary's name, and under active prevention a blocked step leaves no process record, which Step 2 works around.
 
-### Hunting tunnel establishment
+#### Hunting tunnel establishment
 
-#### Step 1 - Size the developer baseline
+##### Step 1 - Size the developer baseline
 
 Before hunting, measure how common tunnel use already is across the monitored population, so the hunt can be tuned rather than drowned. Count the distinct devices and users that have run a tunnel command in the last 30 days, stacked by the process that launched it and by its signer, and separately the distinct devices that have reached the relay. Then see how many of those also carry a normal VS Code install with developer-consistent ancestry.
 
-#### Step 2 - Find the tunnel and pull its execution context
+##### Step 2 - Find the tunnel and pull its execution context
 
 The binary can be renamed, so the selector keys on what a rename does not change: the PE original name recovered from the file, which reads `code.exe` on the renamed binary, paired with a tunnel command. On Defender the field is `ProcessVersionInfoOriginalFileName`, on Falcon it is `OriginalFilename` on the process event. On Falcon the field is sparse and in the telemetry we tested every populated record was a genuine name mismatch. On Defender it is read from the PE and is present whether or not the binary was renamed, so precision comes from pairing it with the tunnel command. To isolate the rename-evasion case on Defender specifically, add the mismatch condition, original name `code.exe` with an on-disk name that is neither `code.exe` nor `code-tunnel.exe`, which is exactly what the built-in `MismatchingOriginalNameWindowsBinary` detection keys on. 
 
 A selector alone catches legitimate developer use so pull the chain of parent processes in the same pass and stack the results. Developer use tends to run from a terminal, as WindowsTerminal to powershell to the installed `code` or `code-tunnel.exe`, while an intrusion shows a scripted or service parent, such as wscript and cmd out of `C:\ProgramData`, or a persistence launch from explorer at logon. Defender carries the parent in full and the grandparent by name, so one self-join on process ID and creation time within the device recovers the grandparent's command line. Falcon carries four generations in `ProcessAncestryInformation`, joined to the process event on `aid` and `TargetProcessId`. 
 
-#### Step 3 - Corroborate with the relay, the server, and persistence
+##### Step 3 - Corroborate with the relay, the server, and persistence
 
 A candidate from Step 2 is confirmed against the rest of the chain, all of it rename-independent. These are a menu, not a sequence: Run whichever the case provides, and any one alongside a Step 2 hit turns a maybe into a yes. The relay FQDN rides on the connection event on Defender (`RemoteUrl`) and on a discrete DNS lookup on Falcon (`DomainName`). The server is node running `server-main.js`, unpacked under a `servers\Stable-<commit>` path the CLI builds regardless of the binary's name. Persistence is an HKCU Run key whose value is named `Visual Studio Code Tunnel`, or a script dropped into the Startup folder. Each platform adds one corroborator the other lacks: Defender records the tunnel server's named pipe as a discrete event, keyed on the `\Device\NamedPipe\code-` form, and Falcon records the Run-key write as a named alert-class event, `SuspiciousRegAsepUpdate`, that never reaches the console.
 
-### Hunting session activity inside an established tunnel
+#### Hunting session activity inside an established tunnel
 
-#### Step 4 - Find what runs under the tunnel server
+##### Step 4 - Find what runs under the tunnel server
 
 Once the tunnel is live, the operator's commands run under the server. The session shell is spawned by node running `server-main.js`, and the discovery they run, such as checking the current user, the local administrators group, and system information, sits one level below that shell with node as its grandparent. Hunt for shells whose parent is the tunnel server, scoping the server to the one confirmed in Step 2 and 3 so it is the tunnel's and not an editor's. The ancestry view reaches the shell's direct children, the typed commands and the `-File` script launch itself, but not the commands a script runs inside itself, which sit a tier deeper under the script's own powershell. Reach those by pivoting from the visible `-File` launch.
 
