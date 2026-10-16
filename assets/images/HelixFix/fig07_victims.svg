@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="t d" style="font-synthesis:none">
+<title id="t">HelixFix victims: compromised websites by hosting country and week of first sighting</title>
+<desc id="d">Left: 2,005 compromised websites by hosting country; Germany 472, Russia 333, United States 229, France 223, Poland 82, Switzerland 46, United Kingdom 46, other 574 including 42 without country. Right: new sites per week of first urlscan sighting: 14–20 Sep 1499, 21–27 Sep 40, 28 Sep–4 Oct 179, 5–11 Oct 225, 12–14 Oct 62. The first week contains the start of the search window and a bulk scan on 16 September; the fourth a bulk scan on 7 October.</desc>
+<rect width="1600" height="600" fill="#FFFFFF"/>
+<text x="48" y="66" font-size="41.3" textLength="1504" lengthAdjust="spacing"><tspan font-family="'TeleNeo Office ExtraBold', 'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="800" fill="#E20074">HelixFix victims: </tspan><tspan font-family="'TeleNeo Office ExtraBold', 'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="800" fill="#000000">compromised websites by hosting country and week of first sighting</tspan></text>
+<text x="48.0" y="106.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="21" fill="#4C4C4C" text-anchor="start">Websites whose urlscan scan loaded a known loader host, first seen 14 Sep–14 Oct 2026 (UTC); n = 2,005, a lower bound</text>
+<text x="48.0" y="158.0" font-family="'TeleNeo Office Bold', 'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="700" font-size="22" fill="#000000" text-anchor="start">By hosting country</text>
+<text x="226.9" y="158.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="18" fill="#4C4C4C" text-anchor="start">urlscan page.country</text>
+<text x="856.0" y="158.0" font-family="'TeleNeo Office Bold', 'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="700" font-size="22" fill="#000000" text-anchor="start">By week of first urlscan sighting</text>
+<text x="1150.1" y="158.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="18" fill="#4C4C4C" text-anchor="start">new sites, Mon–Sun</text>
+<line x1="812" y1="136" x2="812" y2="560" stroke="#E5E5E5" stroke-width="1"/>
+<path d="M194.2,200.0 h431.5 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-431.5 z" fill="#E20074"><title>Germany: 472</title></path>
+<text x="180.2" y="219.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">Germany</text>
+<text x="641.7" y="219.0" font-family="'TeleNeo Office Bold', 'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="700" font-size="20" fill="#000000" text-anchor="start">472</text>
+<path d="M194.2,236.0 h302.7 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-302.7 z" fill="#A3A3A3"><title>Russia: 333</title></path>
+<text x="180.2" y="255.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">Russia</text>
+<text x="512.9" y="255.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">333</text>
+<path d="M194.2,272.0 h206.3 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-206.3 z" fill="#A3A3A3"><title>United States: 229</title></path>
+<text x="180.2" y="291.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">United States</text>
+<text x="416.5" y="291.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">229</text>
+<path d="M194.2,308.0 h200.7 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-200.7 z" fill="#A3A3A3"><title>France: 223</title></path>
+<text x="180.2" y="327.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">France</text>
+<text x="410.9" y="327.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">223</text>
+<path d="M194.2,344.0 h70.0 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-70.0 z" fill="#A3A3A3"><title>Poland: 82</title></path>
+<text x="180.2" y="363.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">Poland</text>
+<text x="280.2" y="363.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">82</text>
+<path d="M194.2,380.0 h36.6 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-36.6 z" fill="#A3A3A3"><title>Switzerland: 46</title></path>
+<text x="180.2" y="399.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">Switzerland</text>
+<text x="246.9" y="399.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">46</text>
+<path d="M194.2,416.0 h36.6 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-36.6 z" fill="#A3A3A3"><title>United Kingdom: 46</title></path>
+<text x="180.2" y="435.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">United Kingdom</text>
+<text x="246.9" y="435.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">46</text>
+<line x1="48" y1="457.0" x2="768" y2="457.0" stroke="#E5E5E5" stroke-width="1"/>
+<path d="M194.2,466.0 h526.1 a6,6 0 0 1 6,6 v12 a6,6 0 0 1 -6,6 h-526.1 z" fill="#A3A3A3"><title>Other: 574</title></path>
+<text x="180.2" y="485.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="end">Other</text>
+<text x="736.3" y="485.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="start">574</text>
+<text x="180.2" y="506.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="16" fill="#4C4C4C" text-anchor="end">incl. 42 unknown</text>
+<path d="M901.6,490 v-240.0 a6.0,6.0 0 0 1 6.0,-6.0 h36.0 a6.0,6.0 0 0 1 6.0,6.0 v240.0 z" fill="#A3A3A3"><title>Week of 2026-09-14: 1499</title></path>
+<text x="925.6" y="234.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="middle">1,499</text>
+<text x="925.6" y="520.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#4C4C4C" text-anchor="middle">14–20 Sep</text>
+<path d="M1040.8,490 v-3.3 a3.3,3.3 0 0 1 3.3,-3.3 h41.4 a3.3,3.3 0 0 1 3.3,3.3 v3.3 z" fill="#A3A3A3"><title>Week of 2026-09-21: 40</title></path>
+<text x="1064.8" y="473.4" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="middle">40</text>
+<text x="1064.8" y="520.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#4C4C4C" text-anchor="middle">21–27 Sep</text>
+<path d="M1180.0,490 v-23.4 a6.0,6.0 0 0 1 6.0,-6.0 h36.0 a6.0,6.0 0 0 1 6.0,6.0 v23.4 z" fill="#A3A3A3"><title>Week of 2026-09-28: 179</title></path>
+<text x="1204.0" y="450.6" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="middle">179</text>
+<text x="1204.0" y="520.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#4C4C4C" text-anchor="middle">28 Sep–4 Oct</text>
+<path d="M1319.2,490 v-30.9 a6.0,6.0 0 0 1 6.0,-6.0 h36.0 a6.0,6.0 0 0 1 6.0,6.0 v30.9 z" fill="#A3A3A3"><title>Week of 2026-10-05: 225</title></path>
+<text x="1343.2" y="443.1" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="middle">225</text>
+<text x="1343.2" y="520.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#4C4C4C" text-anchor="middle">5–11 Oct</text>
+<path d="M1458.4,490 v-5.1 a5.1,5.1 0 0 1 5.1,-5.1 h37.8 a5.1,5.1 0 0 1 5.1,5.1 v5.1 z" fill="#A3A3A3"><title>Week of 2026-10-12: 62</title></path>
+<text x="1482.4" y="469.8" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#000000" text-anchor="middle">62</text>
+<text x="1482.4" y="520.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="20" fill="#4C4C4C" text-anchor="middle">12–14 Oct</text>
+<line x1="856" y1="490" x2="1552" y2="490" stroke="#A3A3A3" stroke-width="1"/>
+<line x1="925.6" y1="532" x2="925.6" y2="542" stroke="#A3A3A3" stroke-width="1"/>
+<text x="925.6" y="556.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="17" fill="#4C4C4C" text-anchor="middle">search window start,</text>
+<text x="925.6" y="576.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="17" fill="#4C4C4C" text-anchor="middle">bulk scan 16 Sep</text>
+<line x1="1343.2" y1="532" x2="1343.2" y2="542" stroke="#A3A3A3" stroke-width="1"/>
+<text x="1343.2" y="556.0" font-family="'TeleNeo Office', 'TeleNeo', Arial, sans-serif" font-weight="400" font-size="17" fill="#4C4C4C" text-anchor="middle">bulk scan 7 Oct</text>
+</svg>
