@@ -1,0 +1,54 @@
+.img-xs {
+  width: 40%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-small {
+  width: 80%;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-large {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.space-before-sm {
+  margin-top: 1rem;
+}
+
+.space-before-md {
+  margin-top: 2rem;
+}
+
+.space-before-lg {
+  margin-top: 3rem;
+}
+
+.img-caption {
+  text-align: center;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.content td:nth-child(2),
+.content th:nth-child(2) {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.code-caption {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: -0.5em;
+    margin-bottom: 2em;
+}

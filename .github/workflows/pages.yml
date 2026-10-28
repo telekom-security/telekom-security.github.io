@@ -1,0 +1,59 @@
+name: Build and deploy Pages
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Verify preserved article
+        run: test -s _posts/2018-07-10-adb-botnet.md
+      - run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      - name: Check generated site
+        run: |
+          test -s _site/index.html
+          test -s _site/sitemap.xml
+          test -s _site/page2/index.html
+          test -s _site/2018/07/adb-botnet.html
+          test "$(cat _site/CNAME)" = github.security.telekom.com
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-preview
+          path: _site/
+          include-hidden-files: true
+          retention-days: 14
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request' && vars.PAGES_DEPLOY_ENABLED == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

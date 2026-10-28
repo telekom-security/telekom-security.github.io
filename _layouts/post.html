@@ -42,3 +42,6 @@ layout: default
     {{ content }}
   </div>
 </article>
+{% if page.obfuscated_contact %}
+<script src="{{ '/js/obfuscated-contact.js' | relative_url }}"></script>
+{% endif %}
