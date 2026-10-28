@@ -39,6 +39,7 @@ navigation:
 
 exclude:
   - README.md
+  - PAGES-DEPLOYMENT.md
   - Rakefile
   - Gemfile
   - Gemfile.lock

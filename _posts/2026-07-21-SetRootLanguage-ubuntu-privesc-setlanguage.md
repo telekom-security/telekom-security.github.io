@@ -4,6 +4,7 @@ header: 'SetRootLanguage: Local privilege escalation in Ubuntu via AccountsServi
 og_description: "Deutsche Telekom's Red Team discovered a two-bug chain in Ubuntu to gain root privileges via AccountsService."
 og_image: "/assets/images/SetRootLanguage/SetRootLanguage-og.png"
 tags: ['advisories', 'writeup']
+obfuscated_contact: true
 cwes: ['CWE-271: Privilege Dropping / Lowering Errors', 'CWE-78: Improper Neutralization of Special Elements used in an OS Command (OS Command Injection)', 'CWE-20: Improper Input Validation']
 affected_product: 'AccountsService, language-selector'
 vulnerability_release_date: '2026-07-21'
@@ -82,55 +83,4 @@ If you have questions regarding this research or are interested in our [security
 - 2026-07-21: Coordinated responsible disclosure: Canonical releases patches and this blog post is published.
 - 2026-07-27: Added fixed package for Ubuntu 26.10 (stonking)
 
-<style>
-.content {
-    display: block;
-    text-align: justify;
-}
-
-.img-small {
-  width: 80%;
-  max-width: 100%;
-  height: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5em 0;
-  font-size: 0.95em;
-}
-
-th, td {
-  padding: 0.6em 1em;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-th {
-  background: #f5f5f5;
-  font-weight: 600;
-  border-bottom: 2px solid #ccc;
-}
-
-tr:hover {
-  background: #fafafa;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelectorAll(".obf").forEach(el => {
-      const encoded = el.dataset.obf;
-      try {
-        const decoded = atob(atob(encoded));
-        el.textContent = decoded;
-      } catch (e) {
-        el.textContent = "unknown";
-      }
-    });
-  }, 1500);
-});
-</script>
-
+<link rel="stylesheet" href="{{ "/css/setrootlanguage.css" | relative_url }}">

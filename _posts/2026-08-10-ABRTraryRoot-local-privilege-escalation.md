@@ -4,6 +4,7 @@ header: 'ABRTraryRoot: Local privilege escalation in Red Hat distributions'
 og_description: 'A chain of five bugs in ABRT (Automatic Bug Reporting Tool) allows achieving root code execution.'
 og_image: "/assets/images/ABRTraryRoot/abrt-og.png"
 tags: ['advisories', 'writeup']
+obfuscated_contact: true
 cwes: ['CWE-367 (Time-of-check Time-of-use (TOCTOU) Race Condition)', 'CWE-362: Concurrent Execution using Shared Resource with Improper Synchronization (Race Condition)', 'CWE-59: Improper Link Resolution Before File Access (Link Following)', 'CWE-74: Improper Neutralization of Special Elements in Output Used by a Downstream Component (Injection)']
 affected_product: 'ABRT'
 vulnerability_release_date: '2026-06-15'
@@ -162,54 +163,4 @@ If you have questions regarding this research or are interested in our [security
 - 2026-08-10: Publication of this blog post.
 
 
-<style>
-.content {
-    display: block;
-    text-align: justify;
-}
-
-.img-small {
-  width: 80%;
-  max-width: 100%;
-  height: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5em 0;
-  font-size: 0.95em;
-}
-
-th, td {
-  padding: 0.6em 1em;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-th {
-  background: #f5f5f5;
-  font-weight: 600;
-  border-bottom: 2px solid #ccc;
-}
-
-tr:hover {
-  background: #fafafa;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelectorAll(".obf").forEach(el => {
-      const encoded = el.dataset.obf;
-      try {
-        const decoded = atob(atob(encoded));
-        el.textContent = decoded;
-      } catch (e) {
-        el.textContent = "unknown";
-      }
-    });
-  }, 1500);
-});
-</script>
+<link rel="stylesheet" href="{{ "/css/abrtraryroot.css" | relative_url }}">
