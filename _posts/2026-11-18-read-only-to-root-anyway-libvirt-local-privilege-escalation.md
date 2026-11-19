@@ -92,7 +92,7 @@ And this was not a `virsh` bug. It was simply one client capable of reaching the
 
 The code that launched the helper also cleared Linux capabilities but left the process running with uid 0. On the tested host, that did not prevent the root-shell payload. SELinux did not stop it either: the `virtstoraged_t` domain was permissive.
 
-We confirmed host-root impact on Fedora 44 with libvirt `12.0.0-3.fc44`. Separately, we reproduced helper execution against upstream `v12.4.0` in a rootless Podman container, reaching container uid 0—not escaping to host root. Other deployments depend on socket access and SELinux/AppArmor policy, so these results are not a claim that every distribution was exploitable.
+We confirmed host-root impact on Fedora 44 with libvirt `12.0.0-3.fc44`. Separately, we reproduced helper execution against upstream `v12.4.0` in a rootless Podman container, reaching container uid 0 without escaping to host root. Other deployments depend on socket access and SELinux/AppArmor policy, so these results are not a claim that every distribution was exploitable.
 
 ## Closing the connection loophole
 
